@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+ion-icon {
+  color: #7249b9;
+  font-size: 60px;
+}
