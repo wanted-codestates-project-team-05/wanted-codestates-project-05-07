@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export function DataNav() {
   
@@ -11,16 +12,18 @@ export function DataNav() {
   return (
     <DataHeader>
       <div className="data-tit">
-        <img src="/icon.png" className="icon-img" />
+        <img src="/icon.png" alt="" className="icon-img" />
         <h1>데이터 정보</h1>
       </div>
 
       <ul>
         <li className="li-first">
-          <button onClick={handlerClick}>formList</button>
+          <Link to="/">
+            <p>formList</p>
+          </Link>
         </li>
         <li className="li-second">
-          <button>dataList</button>
+          <p>dataList</p>
         </li>
       </ul>
     </DataHeader>
@@ -39,14 +42,13 @@ const DataHeader = styled.header`
     align-items: center;
     .icon-img {
       width: 35px;
-      margin: 0 .1em 0 1em;
+      margin: 0 0.1em 0 1em;
     }
     h1 {
       background: url('') no-repeat;
       background-size: 40px 40px;
       font-size: 1.5em;
       font-weight: 400;
-      
     }
   }
   ul {
@@ -58,11 +60,16 @@ const DataHeader = styled.header`
       display: inline-block;
       list-style: none;
       padding-left: 0;
-      button {
-        font-size: 1.4em;
-        background-color: inherit;
-        border: none;
+      font-size: 1.4em;
+      background-color: inherit;
+      border: none;
+      a {
+        text-decoration: none;
+        color: #000000;
         cursor: pointer;
+      }
+      p {
+        margin: 0;
       }
     }
     .li-first {

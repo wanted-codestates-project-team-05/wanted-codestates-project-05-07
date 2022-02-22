@@ -81,14 +81,6 @@ const DataItemList = styled.article`
   box-shadow: rgba(0, 0, 0, 0.07) 1.95px 1.95px 2.6px;
   padding: 20px;
   box-sizing: border-box;
-
-  .none-list {
-    padding-top: 10em;
-    text-align: center;
-    color: gray;
-    box-sizing: border-box;
-  }
-
   .card {
     display: inline-flex;
     margin-right: 10px;
