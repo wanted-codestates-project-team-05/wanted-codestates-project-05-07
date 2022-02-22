@@ -46,21 +46,23 @@ const DataList = () =>  {
     
 
   ]
+  let dataLength = fakeData.length;
   return (
     <DataListContainer>
-      <DataNav />
+      <DataNav num={dataLength} />
       <DataItemList>
-        {fakeData && fakeData.map((item)=> (
-          <div className='card'>
-            <DataCard 
-              name={item.name} 
-              phone={item.phone} 
-              address={item.address} 
-              options={item.options}
-              fileName={item.fileName}
-            />
-          </div>
-        ))}
+        {fakeData &&
+          fakeData.map((item) => (
+            <div className="card">
+              <DataCard
+                name={item.name}
+                phone={item.phone}
+                address={item.address}
+                options={item.options}
+                fileName={item.fileName}
+              />
+            </div>
+          ))}
       </DataItemList>
     </DataListContainer>
   );

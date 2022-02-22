@@ -2,18 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export function DataNav() {
-  
-  function handlerClick() { 
-    window.location.replace('/home');
-  }
-
+export function DataNav(dataLength) {
+  // function handlerClick() {
+  //   window.location.replace('/home');
+  // }
+  const num = dataLength.num;
 
   return (
     <DataHeader>
       <div className="data-tit">
         <img src="/icon.png" alt="" className="icon-img" />
-        <h1>데이터 정보</h1>
+        <h1>dataList {num}개</h1>
       </div>
 
       <ul>
