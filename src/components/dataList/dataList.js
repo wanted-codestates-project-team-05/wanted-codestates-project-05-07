@@ -1,13 +1,66 @@
 import React from 'react'
 import styled from 'styled-components';
 import { DataNav } from './DataNav';
+import { DataCard } from './DataCard';
 
 const DataList = () =>  {
+
+  const fakeData = [
+    {
+      name: 'test1',
+      phone: '010-1111-1111',
+      address: 'seoul',
+      fileName: 'file1',
+      options: 'r'
+    },{
+      name: 'test2',
+      phone: '010-2222-2222',
+      address: 'seoul',
+      fileName: 'file2',
+      options: 'q'
+    },{
+      name: 'test3',
+      phone: '010-3333-3333',
+      address: 'seoul',
+      fileName: 'file3',
+      options: 'a'
+    },{
+      name: 'test4',
+      phone: '010-4444-4444',
+      address: 'seoul',
+      fileName: 'file4',
+      options: 'b'
+    },{
+      name: 'test4',
+      phone: '010-4444-4444',
+      address: 'seoul',
+      fileName: 'file4',
+      options: 'b'
+    },{
+      name: 'test4',
+      phone: '010-4444-4444',
+      address: 'seoul',
+      fileName: 'file4',
+      options: 'b'
+    }
+    
+
+  ]
   return (
     <DataListContainer>
       <DataNav />
       <DataItemList>
-        
+        {fakeData && fakeData.map((item)=> (
+          <div className='card'>
+            <DataCard 
+              name={item.name} 
+              phone={item.phone} 
+              address={item.address} 
+              options={item.options}
+              fileName={item.fileName}
+            />
+          </div>
+        ))}
       </DataItemList>
     </DataListContainer>
   );
@@ -19,17 +72,27 @@ const DataListContainer = styled.div`
 `;
 
 const DataItemList = styled.article`
-  width: 90%;
-  height: calc(100vh - 300px);
+  width: 92%;
+  min-height: calc(100vh - 550px);
+  height: auto;
   background-color: #fff;
   margin: 5em auto 0;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.07) 1.95px 1.95px 2.6px;
+  padding: 20px;
+  box-sizing: border-box;
+
   .none-list {
     padding-top: 10em;
     text-align: center;
     color: gray;
     box-sizing: border-box;
+  }
+
+  .card {
+    display: inline-flex;
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 `;
 

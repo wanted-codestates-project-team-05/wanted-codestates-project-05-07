@@ -28,8 +28,7 @@ export const DataCard = (props) => {
 
 const Container = styled.div`
 	width: 240px;
-	min-height: 300px;
-	height: auto;
+	height: 300px;
 	border-radius: 5px;
 	display: inline-flex;
 	/* border: 1px solid lightgray; */
