@@ -1,4 +1,4 @@
-const Dummie = [
+const FormList = [
   {
     id: "name",
     type: "text",
@@ -34,11 +34,11 @@ const Dummie = [
   },
   {
     id: "agreement_0",
-    type: "agreement",
+    type: "checkbox",
     label: "개인정보 수집 약관 동의",
     required: true,
     contents: "<p>(개인정보 수집 및 약관 내용)</p>",
   },
 ];
 
-export default Dummie;
+export default FormList;
