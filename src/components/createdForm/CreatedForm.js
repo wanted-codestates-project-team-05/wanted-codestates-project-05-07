@@ -8,23 +8,24 @@ const CreatedForm = () => {
   const [isAddress, setIsAddress] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [disabledSubmit, setDisabledSubmit] = useState(false);
   const getAddress = (address) => {
     setIsAddress(address);
   };
   const handleLoading = (loading) => {
     setIsLoading(loading);
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null);
   const openButtonRef = useRef(null);
   const handleClickClose = useCallback(() => {
     setIsModalOpen(true);
-    setTimeout(() => modalRef.current.focus());
+    setTimeout(() => modalRef.current.focus(), 100);
   }, []);
   const handleClickOpen = useCallback(() => {
     setIsModalOpen(false);
     // 모달의 웹 접근성을 위해 시간차를 두고 포커스 이동
-    setTimeout(() => openButtonRef.current.focus());
+    setTimeout(() => openButtonRef.current.focus(), 100);
   }, []);
   const handleClickSubmit = () => {
     submitForm(
@@ -62,11 +63,13 @@ const CreatedForm = () => {
           />
         </div>
         <ButtonContainer>
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <button onClick={handleClickSubmit}>제출하기</button>
-          )}
+          <SubmitButton
+            onClick={handleClickSubmit}
+            disabled={disabledSubmit}
+            disabledSubmit={disabledSubmit}
+          >
+            {isLoading ? <Loading /> : isSubmit ? "제출완료:)" : "제출하기"}
+          </SubmitButton>
         </ButtonContainer>
       </Fieldset>
       <AddressModal
@@ -108,4 +111,22 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
+`;
+
+const SubmitButton = styled.button`
+  text-align: center;
+  line-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 400px;
+  height: 50px;
+  color: white;
+  font-weight: 600;
+  margin: 8px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: ${({ disabledSubmit }) =>
+    disabledSubmit ? "lightGrey" : "#eb4d4b"};
 `;
