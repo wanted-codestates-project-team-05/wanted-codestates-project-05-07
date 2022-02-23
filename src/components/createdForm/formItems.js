@@ -40,7 +40,11 @@ const customStyles = {
     width: "100%",
     height: "50px",
     border: "none",
+    borderRadius: 12,
+    paddingLeft: 5,
     background: "#f7fafb",
+    fontSize: 23,
+    marginTop: 10,
   }),
   singleValue: (provided, state) => ({
     ...provided,

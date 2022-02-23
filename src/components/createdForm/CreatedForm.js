@@ -8,15 +8,13 @@ import { InputBox, SelectBox, AgreementBox } from "./formItems";
 import PhotoInput from "./PhotoInput";
 
 const CreatedForm = ({ newForm }) => {
-  const [address, setAddress] = useState("");
-
   const [user, setUser] = useState({
     name: "",
     phone: "",
     address: "",
-    select: "",
-    option: "",
-    file: "",
+    input_0: "",
+    input_1: "",
+    agreement_0: false,
   });
 
   //오류메시지 상태저장
@@ -176,7 +174,7 @@ const CreatedForm = ({ newForm }) => {
             id={form.id}
             type={form.type}
             required={form.required}
-            value={user[form.id]}
+            value={user[form.input_0]}
             onChange={optionHandler}
             options={form.options}
           />
@@ -237,6 +235,7 @@ const Title = styled.h3`
 
 const Form = styled.form`
   width: 400px;
+  height: 110vh;
   @media ${({ theme }) => theme.device.mobile} {
     width: 90%;
   }
