@@ -99,15 +99,15 @@ const DataList = () =>  {
       options: 'a'
     }
   ]
-
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPerPage, setCurrentPerPage] = useState(10);
   const endPage = currentPage * currentPerPage - 1;
   const startPage = currentPage * currentPerPage - currentPerPage;
-
+  let dataLength = fakeData.length;
+  
   return (
     <DataListContainer>
-      <DataNav />
+      <DataNav num={dataLength} />
       <DataItemList>
         {fakeData && fakeData
         .filter((item, index) => index <= endPage && index >= startPage )
@@ -148,14 +148,6 @@ const DataItemList = styled.article`
   box-shadow: rgba(0, 0, 0, 0.07) 1.95px 1.95px 2.6px;
   padding: 20px;
   box-sizing: border-box;
-
-  .none-list {
-    padding-top: 10em;
-    text-align: center;
-    color: gray;
-    box-sizing: border-box;
-  }
-
   .card {
     display: inline-flex;
     margin-right: 10px;
