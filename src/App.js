@@ -7,6 +7,7 @@ import CreatedForm from "./components/createdForm/CreatedForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DataList from "./components/dataList/DataList";
 import { newForm } from "./components/createdForm/FormData";
+import AgreementForm from "./components/createdForm/AgreementForm";
 
 function App() {
   const [formAnswer, setFormAnswer] = useState();
@@ -19,6 +20,10 @@ function App() {
             element={
               <CreatedForm newForm={newForm} setFormAnswer={setFormAnswer} />
             }
+          />
+          <Route
+            path="/createdForm/openAgreement"
+            element={<AgreementForm />}
           />
           <Route path="/dataList" element={<DataList />} />
         </Routes>

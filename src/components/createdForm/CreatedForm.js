@@ -227,6 +227,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 const Title = styled.h3`
   margin-top: 20px;
   font-size: 20px;
