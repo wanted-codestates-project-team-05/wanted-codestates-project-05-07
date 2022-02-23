@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { newForm } from "./FormData";
 import AddressInput from "./AddressInput";
 import SubmitButton from "./SubmitButton";
 import { submitForm } from "./submitForm";
 import { InputBox, SelectBox, AgreementBox } from "./formItems";
 import PhotoInput from "./PhotoInput";
 
-const CreatedForm = () => {
+const CreatedForm = ({ newForm }) => {
   const [address, setAddress] = useState("");
 
   const [user, setUser] = useState({
