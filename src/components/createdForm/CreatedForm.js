@@ -6,7 +6,7 @@ import { submitForm } from "./submitForm";
 import { InputBox, SelectBox, AgreementBox } from "./formItems";
 import PhotoInput from "./PhotoInput";
 
-const CreatedForm = ({ newForm }) => {
+const CreatedForm = ({ newForm, setFormAnswer }) => {
   const [address, setAddress] = useState("");
 
   const [user, setUser] = useState({
