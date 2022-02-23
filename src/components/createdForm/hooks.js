@@ -1,7 +1,8 @@
 // import React from "react";
+import React, { components, useEffect, useState } from "react";
 import styled from "styled-components";
-import donw from "../../img/down_arrow.png";
-import up from "../../img/up_arrow.png";
+import Select from "react-select";
+import { VscChevronRight } from "react-icons/vsc";
 
 const Label = styled.span`
   font-size: 18px;
@@ -23,14 +24,30 @@ const Input = styled.input`
     font-size: 16px;
   }
 `;
-const SelectBox = styled(Input)`
-  padding: 0 20px;
-  -webkit-appearance: none; /* 네이티브 외형 감추기 */
-  -moz-appearance: none;
-  appearance: none;
-  background: url(${donw}) no-repeat 95% 50%;
+// const Select = styled(Input)`
+//   padding: 0 20px;
+//   -webkit-appearance: none; /* 네이티브 외형 감추기 */
+//   -moz-appearance: none;
+//   appearance: none;
+//   background: url(${donw}) no-repeat 95% 50%;
+//   &:option {
+//     border: 2px solid red;
+//   }
+// `;
+// const Option = styled.option`
+//   border-bottom: 1px dashed rgb(170, 72, 72);
+//   padding: 5px 15px 5px;
+//   transition: 0.1s;
+// `;
+
+const Argeement = styled.input`
+  border: 1px solid #999;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  margin-right: 10px;
+  cursor: "pointer";
 `;
-const Option = styled.option``;
 export const InputBox = ({
   label,
   nameMessage,
@@ -41,7 +58,6 @@ export const InputBox = ({
   value,
   onChange,
   onClick,
-  options,
 }) => {
   return (
     <Label>
@@ -54,46 +70,71 @@ export const InputBox = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        options={options}
         onClick={onClick}
       />
-      {options &&
-        options.map((option) => {
-          <div style={{ position: "absolute" }}>{option}</div>;
-        })}
     </Label>
   );
 };
 
-export const Select = ({
+const options = [
+  { value: "S", label: "S" },
+  { value: "M", label: "M" },
+  { value: "L", label: "L" },
+  { value: "XL", label: "XL" },
+];
+
+export const SelectBox = ({
+  label,
+  id,
+  type,
+  required,
+  value,
+  onChange,
+  // options,
+}) => {
+  return (
+    <Label>
+      {label}
+      <Select
+        id={id}
+        type={type}
+        value={value}
+        required={required}
+        options={options}
+        onChange={onChange}
+      ></Select>
+    </Label>
+  );
+};
+
+export const AgreementBox = ({
   label,
   id,
   type,
   required,
   placeholder,
   value,
-  onChange,
+  onClick,
   options,
 }) => {
   return (
-    <Label>
-      {label}
-      <SelectBox
-        as="select"
+    <Label style={{ flexDirection: "row", alignItems: "center" }}>
+      <Argeement
+        options={options}
         id={id}
         type={type}
         required={required}
         placeholder={placeholder}
         value={value}
-        options={options}
-        onChange={onChange}
-      >
-        {options.map((option) => (
-          <Option key={option} value={option}>
-            {option}
-          </Option>
-        ))}
-      </SelectBox>
+        onClick={onClick}
+      ></Argeement>
+      {label} (필수)
+      <VscChevronRight
+        style={{
+          marginLeft: 130,
+          cursor: "pointer",
+        }}
+      />
     </Label>
   );
 };

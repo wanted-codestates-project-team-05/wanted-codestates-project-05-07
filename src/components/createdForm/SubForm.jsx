@@ -1,8 +1,10 @@
 /* 
 1.폼의 양식은 서버에서 내려주며 포맷은 다음과 같습니다.
+3.휴대폰 번호(type = phone)의 경우 올바른 데이터 타입인지 확인합니다.
+
+
 2.모든 필수 폼(required = true)이 올바르게 입력되었을 때 “제출하기” 버튼이 활성화 됩니다.
 (name, phone, address, input_0(옵션), agreement_0(개인정보 수집 및 약관 내용))
-3.휴대폰 번호(type = phone)의 경우 올바른 데이터 타입인지 확인합니다.
 4.파일 첨부 시, 얼마나 업로드 되었는지 프로그레스바를 출력합니다.
 */
 
@@ -11,7 +13,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FormList from "./FormList";
-import { InputBox, Select } from "./hooks";
+import { InputBox, SelectBox, AgreementBox } from "./hooks";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -37,8 +39,9 @@ const Footer = styled.footer`
   align-items: center;
   position: absolute;
   bottom: 0;
+  left: 0;
   height: 80px;
-  width: 100%;
+  width: 100vw;
   box-shadow: 2px 2px 2px green;
 `;
 const Submit = styled.input`
@@ -68,6 +71,7 @@ function SubForm() {
     phone: "",
     address: "",
     select: "",
+    option: "",
     file: "",
   });
   //오류메시지 상태저장
@@ -122,8 +126,10 @@ function SubForm() {
     }
     if (value === "") {
       setPhoneMessage("휴대폰 번호 항목은 필수 정보입니다");
+      setIsPhone(false);
     } else if (!/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/.test(value)) {
       setPhoneMessage("휴대폰 번호가 올바르지 않습니다.");
+      setIsPhone(false);
     } else {
       setPhoneMessage("");
       setIsPhone(true);
@@ -132,8 +138,22 @@ function SubForm() {
 
   // option
   const optionHandler = (e) => {
-    setUser({ ...user, option: e.target.value });
+    setUser({ ...user, option: e.value });
     setOption(true);
+  };
+
+  // agreement
+  const agreementHandler = () => {
+    setAgreement((prev) => !prev);
+  };
+
+  // formSubmit
+  const formSubmit = () => {
+    if (!isName || !isPhone || !option || !agreement) {
+      alert("필수항목을 입력하세요");
+    } else {
+      alert("성공");
+    }
   };
 
   return (
@@ -165,7 +185,6 @@ function SubForm() {
                   id={form.id}
                   type={form.type}
                   required={form.required}
-                  placeholder={form.placeholder}
                   value={user[form.id]}
                   onChange={phoneHandler}
                 />
@@ -179,41 +198,47 @@ function SubForm() {
                 id={form.id}
                 type={form.type}
                 required={form.required}
-                placeholder={form.placeholder}
                 value={user[form.id]}
                 onChange={nameHandler}
               />
             )}
             {form.id === "input_0" && (
-              <Select
+              <SelectBox
                 label={form.label}
                 nameMessage={nameMessage}
                 id={form.id}
                 type={form.type}
                 required={form.required}
-                placeholder={form.placeholder}
                 value={user[form.id]}
                 onChange={optionHandler}
                 options={form.options}
-              ></Select>
+              ></SelectBox>
             )}
             {form.id === "input_1" && (
               <InputBox
                 label={form.label}
-                nameMessage={nameMessage}
                 id={form.id}
                 type={form.type}
                 required={form.required}
-                placeholder={form.placeholder}
                 value={user[form.id]}
+              />
+            )}
+            {form.id === "agreement_0" && (
+              <AgreementBox
+                label={form.label}
+                id={form.id}
+                type={form.type}
+                required={form.required}
+                value={user[form.id]}
+                onClick={agreementHandler}
               />
             )}
           </InputList>
         ))}
+        <Footer>
+          <Submit type="submit" value="Submit" onClick={formSubmit}></Submit>
+        </Footer>
       </Form>
-      <Footer>
-        <Submit type="submit" value="Submit"></Submit>
-      </Footer>
     </Wrapper>
   );
 }
