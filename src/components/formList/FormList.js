@@ -5,8 +5,8 @@ import Pagination from "../commonComponents/Pagination";
 
 const Background = styled.div`
   width: 100vw;
-  height: 100vh;
   display: flex;
+  padding-top: 3em;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -38,9 +38,9 @@ const ListTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   font-weight: 500;
   font-size: 18px;
+  text-align: center;
 `;
 
 const Button = styled.button`
@@ -85,7 +85,7 @@ export default function FormList() {
         {currentForms.map((each) => (
           <ListItem key={each.id}>
             <Icon>
-              <ion-icon name="document-text" />
+              {/* <ion-icon name="document-text" /> */}
             </Icon>
             <ListTitle>{each.title}</ListTitle>
           </ListItem>
