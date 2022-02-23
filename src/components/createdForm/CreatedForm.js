@@ -18,11 +18,11 @@ const CreatedForm = () => {
   };
   const modalRef = useRef(null);
   const openButtonRef = useRef(null);
-  const handleClickClose = useCallback(() => {
+  const handleClickModalOpen = useCallback(() => {
     setIsModalOpen(true);
     setTimeout(() => modalRef.current.focus(), 100);
   }, []);
-  const handleClickOpen = useCallback(() => {
+  const handleClickClose = useCallback(() => {
     setIsModalOpen(false);
     // 모달의 웹 접근성을 위해 시간차를 두고 포커스 이동
     setTimeout(() => openButtonRef.current.focus(), 100);
@@ -50,7 +50,7 @@ const CreatedForm = () => {
         <Label>배송지</Label>
         <div
           ref={openButtonRef}
-          onClick={handleClickClose}
+          onClick={handleClickModalOpen}
           aria-haspopup="true"
           aria-pressed={isModalOpen}
         >
@@ -74,7 +74,7 @@ const CreatedForm = () => {
       </Fieldset>
       <AddressModal
         isModalOpen={isModalOpen}
-        onModalClose={handleClickOpen}
+        onModalClose={handleClickClose}
         modalRef={modalRef}
         getAddress={getAddress}
       />
