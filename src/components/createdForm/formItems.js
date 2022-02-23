@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Select from "react-select";
 import { VscChevronRight } from "react-icons/vsc";
+import { AiFillCheckCircle } from "react-icons/ai";
+import { GiCircle } from "react-icons/gi";
 
 const Label = styled.span`
   font-size: 18px;
@@ -23,14 +25,21 @@ const Input = styled.input`
     font-size: 16px;
   }
 `;
+const Files = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 160px;
+  margin-top: 5px;
+  border-radius: 12px;
+  background-color: #f7fafb;
+`;
 
-const Argeement = styled.input`
-  border: 1px solid #999;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  margin-right: 10px;
-  cursor: "pointer";
+const File = styled.input`
+  border: 2px solid black;
+  width: 80px;
+  height: 70px;
 `;
 
 export const InputBox = ({
@@ -84,33 +93,65 @@ export const SelectBox = ({
         required={required}
         options={obj}
         onChange={onChange}
+        placeholder=""
       ></Select>
     </Label>
   );
 };
 
-export const AgreementBox = ({
+export const FileBox = ({
   label,
+  nameMessage,
   id,
   type,
   required,
   placeholder,
   value,
+  onChange,
   onClick,
-  options,
 }) => {
   return (
+    <Label>
+      {`${label} (선택)`}
+      <Files>
+        <File
+          nameMessage={nameMessage}
+          id={id}
+          type={type}
+          required={required}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          onClick={onClick}
+        />
+      </Files>
+    </Label>
+  );
+};
+
+export const AgreementBox = ({ label, onClick, agreement }) => {
+  return (
     <Label style={{ flexDirection: "row", alignItems: "center" }}>
-      <Argeement
-        options={options}
-        id={id}
-        type={type}
-        required={required}
-        placeholder={placeholder}
-        value={value}
-        onClick={onClick}
-      ></Argeement>
-      {label} (필수)
+      {agreement ? (
+        <AiFillCheckCircle
+          onClick={onClick}
+          size="24"
+          style={{
+            marginRight: 10,
+            color: "#eb4d4b",
+          }}
+        />
+      ) : (
+        <GiCircle
+          onClick={onClick}
+          size="24"
+          style={{
+            marginRight: 10,
+          }}
+        />
+      )}
+
+      {`${label} (필수)`}
       <VscChevronRight
         style={{
           marginLeft: 130,
