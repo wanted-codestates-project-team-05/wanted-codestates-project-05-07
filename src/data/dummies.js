@@ -1,1 +1,455 @@
-const dummy = "dummy";
+export const dummyForms = [
+  {
+    id: 1,
+    title: "테스트 폼 1",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "address",
+        type: "address",
+        required: true,
+        label: "배송지",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "옵션1",
+        options: ["S", "L", "XL", "XXL"],
+        required: true,
+      },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 위와 같이 입력할 수 있습니다.</p>",
+      },
+      {
+        id: "agreement_0",
+        type: "agreement",
+        label: "개인정보 수집 약관 동의",
+        required: true,
+        contents: "<p>[개인정보 수집 및 약관 내용]</p>",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "테스트 폼 2",
+    fields: [
+      {
+        id: "phone",
+        type: "phone",
+        required: true,
+        label: "휴대폰 번호",
+        placeholder: "전화번호를 입력해주세요",
+      },
+      { id: "name", type: "text", required: true, label: "이름" },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 추가해주세요.</p>",
+      },
+      {
+        id: "address",
+        type: "address",
+        required: true,
+        label: "배송지",
+      },
+      {
+        id: "agreement_0",
+        type: "agreement",
+        label: "개인정보 수집 약관 동의",
+        required: true,
+        contents: "<p>** 개인정보 수집 및 약관 내용 **</p>",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "테스트 폼 3",
+    fields: [
+      {
+        id: "name",
+        type: "text",
+        required: true,
+        label: "이름",
+        placeholder: "주민등록상 이름 입력",
+      },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "address",
+        type: "address",
+        required: true,
+        label: "배송지",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "성별",
+        options: ["남자", "여자"],
+        required: true,
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "테스트 폼 4",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: false, label: "휴대폰 번호" },
+      {
+        id: "input_0",
+        type: "select",
+        label: "옵션1",
+        options: ["S", "L", "XL", "XXL"],
+        required: true,
+      },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 위와 같이 입력할 수 있습니다.</p>",
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "테스트 폼 5",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 위와 같이 입력할 수 있습니다.</p>",
+      },
+      {
+        id: "agreement_0",
+        type: "agreement",
+        label: "개인정보 수집 약관 동의",
+        required: true,
+        contents: "<p>(개인정보 수집 및 약관 내용)</p>",
+      },
+    ],
+  },
+  {
+    id: 6,
+    title: "테스트 폼 6",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "address",
+        type: "address",
+        required: true,
+        label: "배송지",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "옵션1",
+        options: ["S", "L", "XL", "XXL"],
+        required: true,
+      },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 위와 같이 입력할 수 있습니다.</p>",
+      },
+      {
+        id: "agreement_0",
+        type: "agreement",
+        label: "개인정보 수집 약관 동의",
+        required: true,
+        contents: "<p>(개인정보 수집 및 약관 내용)</p>",
+      },
+    ],
+  },
+  {
+    id: 7,
+    title: "테스트 폼 7",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "address",
+        type: "address",
+        required: false,
+        label: "배송지",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "옵션1",
+        options: ["S", "L", "XL", "XXL"],
+        required: false,
+      },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 선택사항 입니다.</p>",
+      },
+    ],
+  },
+  {
+    id: 8,
+    title: "테스트 폼 8",
+    fields: [
+      { id: "name", type: "text", required: true, label: "성함" },
+      { id: "phone", type: "phone", required: true, label: "전화번호" },
+      {
+        id: "address",
+        type: "address",
+        required: true,
+        label: "주소",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "통신사",
+        options: ["KT", "SKT", "LG"],
+        required: true,
+      },
+    ],
+  },
+  {
+    id: 9,
+    title: "테스트 폼 9",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      {
+        id: "address",
+        type: "address",
+        required: false,
+        label: "배송지",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "옵션1",
+        options: ["S", "L", "XL", "XXL"],
+        required: false,
+      },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 위와 같이 입력할 수 있습니다.</p>",
+      },
+    ],
+  },
+  {
+    id: 10,
+    title: "테스트 폼 10",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "address",
+        type: "address",
+        required: true,
+        label: "배송지",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "옵션1",
+        options: ["S", "L", "XL", "XXL"],
+        required: true,
+      },
+    ],
+  },
+  {
+    id: 11,
+    title: "테스트 폼 11",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "agreement_0",
+        type: "agreement",
+        label: "개인정보 수집 약관 동의",
+        required: true,
+        contents: "<p>(개인정보 수집 및 약관 내용)</p>",
+      },
+    ],
+  },
+  {
+    id: 12,
+    title: "테스트 폼 12",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "address",
+        type: "address",
+        required: true,
+        label: "배송지",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "옵션1",
+        options: ["S", "L", "XL", "XXL"],
+        required: true,
+      },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 위와 같이 입력할 수 있습니다.</p>",
+      },
+    ],
+  },
+  {
+    id: 13,
+    title: "테스트 폼 13",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 위와 같이 입력할 수 있습니다.</p>",
+      },
+    ],
+  },
+  {
+    id: 14,
+    title: "테스트 폼 14",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "address",
+        type: "address",
+        required: true,
+        label: "배송지",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "옵션1",
+        options: ["S", "L", "XL", "XXL"],
+        required: true,
+      },
+      {
+        id: "input_1",
+        type: "file",
+        label: "첨부파일",
+        required: false,
+        description: "<p>첨부파일은 위와 같이 입력할 수 있습니다.</p>",
+      },
+      {
+        id: "agreement_0",
+        type: "agreement",
+        label: "개인정보 수집 약관 동의",
+        required: true,
+        contents: "<p>(개인정보 수집 및 약관 내용)</p>",
+      },
+    ],
+  },
+  {
+    id: 15,
+    title: "테스트 폼 15",
+    fields: [
+      { id: "name", type: "text", required: true, label: "이름" },
+      { id: "phone", type: "phone", required: true, label: "휴대폰 번호" },
+      {
+        id: "address",
+        type: "address",
+        required: false,
+        label: "배송지",
+      },
+      {
+        id: "input_0",
+        type: "select",
+        label: "옵션1",
+        options: ["S", "L", "XL", "XXL"],
+        required: false,
+      },
+    ],
+  },
+];
+
+export const dummyResponse = [
+  {
+    name: "정관우",
+    phone: "010-1234-1234",
+    address: "성남시 분당구 서현동",
+    input_0: "L",
+    input_1:
+      "https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fb%2Fb6%2FImage_created_with_a_mobile_phone.png%2F1200px-Image_created_with_a_mobile_phone.png&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&tbnid=gxFxsvFBmxeZ9M&vet=12ahUKEwj1neDRyZX2AhWCDt4KHQ7iAoYQMygAegUIARDUAQ..i&docid=0JWe7yDOKrVFAM&w=1200&h=900&q=image&ved=2ahUKEwj1neDRyZX2AhWCDt4KHQ7iAoYQMygAegUIARDUAQ",
+    agreement_0: true,
+  },
+  {
+    name: "곽윤구",
+    phone: "010-5432-1223",
+    address: "서울시 강남구 신사동",
+    input_0: "남성",
+    input_1:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FCommons%3AQuality_images&psig=AOvVaw3Q9quw7kUs5-EM6IGJ0ZN4&ust=1645697116893000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJi4sNLJlfYCFQAAAAAdAAAAABAI",
+    agreement_0: true,
+  },
+  {
+    name: "이승연",
+    phone: "010-2332-1234",
+    address: "서울시 마포구 연남동",
+    input_0: "L",
+    input_1:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fvision&psig=AOvVaw3Q9quw7kUs5-EM6IGJ0ZN4&ust=1645697116893000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJi4sNLJlfYCFQAAAAAdAAAAABAN",
+    agreement_0: true,
+  },
+  {
+    name: "이성현",
+    phone: "010-6422-1334",
+    address: "서울시 송파구 잠실동",
+    input_0: "KT",
+  },
+  {
+    name: "이정민",
+    phone: "010-6422-1334",
+    agreement_0: true,
+  },
+  {
+    name: "박승규",
+    phone: "010-2222-3333",
+    address: "서울시 강북구 수유동",
+    input_1:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.akamai.com%2Fproducts%2Fimage-and-video-manager&psig=AOvVaw3Q9quw7kUs5-EM6IGJ0ZN4&ust=1645697116893000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJi4sNLJlfYCFQAAAAAdAAAAABAT",
+  },
+  {
+    name: "강수영",
+    address: "서울시 강남구 논현동",
+    phone: "010-7777-6666",
+    input_0: "XL",
+  },
+  {
+    name: "김코딩",
+    phone: "010-7777-6666",
+    agreement_0: false,
+  },
+  {
+    name: "박해커",
+    phone: "010-7777-6666",
+  },
+  {
+    phone: "010-7777-6666",
+    input_0: "SKT",
+  },
+];
