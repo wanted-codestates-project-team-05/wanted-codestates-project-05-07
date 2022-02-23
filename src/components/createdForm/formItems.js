@@ -25,22 +25,6 @@ const Input = styled.input`
     font-size: 16px;
   }
 `;
-const Files = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 160px;
-  margin-top: 5px;
-  border-radius: 12px;
-  background-color: #f7fafb;
-`;
-
-const File = styled.input`
-  border: 2px solid black;
-  width: 80px;
-  height: 70px;
-`;
 
 export const InputBox = ({
   label,
@@ -84,7 +68,11 @@ export const SelectBox = ({
   });
 
   return (
-    <Label>
+    <Label
+      style={{
+        zIndex: 10,
+      }}
+    >
       {label}
       <Select
         id={id}
@@ -95,36 +83,6 @@ export const SelectBox = ({
         onChange={onChange}
         placeholder=""
       ></Select>
-    </Label>
-  );
-};
-
-export const FileBox = ({
-  label,
-  nameMessage,
-  id,
-  type,
-  required,
-  placeholder,
-  value,
-  onChange,
-  onClick,
-}) => {
-  return (
-    <Label>
-      {`${label} (선택)`}
-      <Files>
-        <File
-          nameMessage={nameMessage}
-          id={id}
-          type={type}
-          required={required}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          onClick={onClick}
-        />
-      </Files>
     </Label>
   );
 };

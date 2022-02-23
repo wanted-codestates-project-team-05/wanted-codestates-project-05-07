@@ -10,6 +10,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FormList from "./FormList";
 import { InputBox, SelectBox, AgreementBox, FileBox } from "./formItems";
+import PhotoInput from "./PhotoInput";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -209,7 +210,7 @@ function SubForm() {
               ></SelectBox>
             )}
             {form.id === "input_1" && (
-              <FileBox
+              <PhotoInput
                 label={form.label}
                 id={form.id}
                 type={form.type}

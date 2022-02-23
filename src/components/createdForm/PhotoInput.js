@@ -10,10 +10,20 @@ const Label = styled.label`
   border: none;
 `;
 
+const Name = styled.span`
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 5px;
+`;
+
 const Shade = styled.div`
   z-index: 1;
-  width: 100%;
-  height: 100%;
+  width: 380px;
+  height: 180px;
+  margin-left: 10px;
   position: absolute;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, ${(props) => (props.image ? "0.5" : "0.02")});
@@ -33,8 +43,9 @@ const Icon = styled.span`
 const Preview = styled.img`
   object-fit: cover;
   position: absolute;
-  width: 360px;
-  height: 220px;
+  width: 380px;
+  height: 180px;
+  margin-left: 10px;
   border-radius: 10px;
 `;
 
@@ -74,7 +85,7 @@ const Progress = styled(ProgressBar)`
   ${(props) => props.progress && barSlide(props.progress)};
 `;
 
-export default function PhotoInput() {
+export default function PhotoInput({ label, id, type, required, value }) {
   const [imageData, setImageData] = useState(null);
   const [size, setSize] = useState(0);
 
@@ -90,6 +101,7 @@ export default function PhotoInput() {
       reader.addEventListener("load", () => {
         setSize(e.target.files[0].size);
         setImageData(reader.result);
+        console.log(reader.result);
       });
       reader.readAsDataURL(e.target.files[0]);
     }
@@ -97,6 +109,7 @@ export default function PhotoInput() {
 
   return (
     <Label htmlFor="fileUpload">
+      <Name>{label}</Name>
       <Input
         id="fileUpload"
         type="file"
