@@ -27,6 +27,31 @@ const Input = styled.input`
   }
 `;
 
+// Option custom
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    color: state.data.color,
+    opacity: 0.8,
+    padding: 20,
+  }),
+  control: (provided) => ({
+    ...provided,
+    width: "100%",
+    height: "50px",
+    border: "none",
+    borderRadius: 12,
+    paddingLeft: 5,
+    background: "#f7fafb",
+    fontSize: 23,
+    marginTop: 10,
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    color: state.data.color,
+  }),
+};
+
 export const InputBox = ({
   label,
   nameMessage,
@@ -83,6 +108,10 @@ export const SelectBox = ({
         options={obj}
         onChange={onChange}
         placeholder=""
+        styles={customStyles}
+        components={{
+          IndicatorSeparator: () => null,
+        }}
       />
     </Label>
   );

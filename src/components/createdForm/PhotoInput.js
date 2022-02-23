@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled, { css, keyframes } from "styled-components";
 import React, { useEffect, useState } from "react";
 
