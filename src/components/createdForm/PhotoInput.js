@@ -23,6 +23,8 @@ const Title = styled.span`
 `;
 
 const Shade = styled.div`
+  position: absolute;
+  z-index: 1;
   width: 360px;
   height: 180px;
   margin-left: 10px;
@@ -47,10 +49,13 @@ const Icon = styled.span`
 const Preview = styled.img`
   object-fit: cover;
   position: absolute;
-  width: 380px;
+  width: 360px;
   height: 180px;
   margin-left: 10px;
   border-radius: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    max-width: 90%;
+  }
 `;
 
 const Input = styled.input`

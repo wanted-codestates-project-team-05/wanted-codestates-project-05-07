@@ -11,12 +11,11 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  margin-bottom: 10px;
 `;
 const Input = styled.input`
   width: 100%;
   height: 50px;
-  margin-top: 5px;
+  margin-top: 15px;
   border-radius: 12px;
   border: ${(props) =>
     props.nameMessage && props.id === "name" ? "1px solid red" : "none"};
@@ -70,9 +69,9 @@ export const SelectBox = ({
 
   return (
     <Label
-        style={{
-            zIndex: 10,
-        }}
+      style={{
+        zIndex: 10,
+      }}
     >
       {label}
       <Select
