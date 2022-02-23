@@ -29,16 +29,6 @@ const InputList = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Footer = styled.footer`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 80px;
-  width: 100vw;
-`;
 
 const AlertMessage = styled.span`
   font-size: 12px;
@@ -243,14 +233,12 @@ function SubForm() {
             )}
           </InputList>
         ))}
-        <Footer>
-          <SubmitButton
-            onClickSubmit={handleClickSubmit}
-            disabledSubmit={disabledSubmit}
-            isLoading={isLoading}
-            isSubmit={isSubmit}
-          />
-        </Footer>
+        <SubmitButton
+          onClickSubmit={handleClickSubmit}
+          disabledSubmit={disabledSubmit}
+          isLoading={isLoading}
+          isSubmit={isSubmit}
+        />
       </Form>
     </Wrapper>
   );

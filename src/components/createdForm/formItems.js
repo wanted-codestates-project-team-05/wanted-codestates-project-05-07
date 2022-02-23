@@ -69,7 +69,11 @@ export const SelectBox = ({
   });
 
   return (
-    <Label>
+    <Label
+        style={{
+            zIndex: 10,
+        }}
+    >
       {label}
       <Select
         id={id}

@@ -38,9 +38,10 @@ const Button = styled.button`
   height: 50px;
   color: white;
   font-weight: 600;
-  margin: 8px 0;
+  margin-top: 40px;
   border: none;
   border-radius: 10px;
+  z-index: -1;
   cursor: pointer;
   background-color: ${({ disabledSubmit }) =>
     disabledSubmit ? "lightGrey" : "#eb4d4b"};
