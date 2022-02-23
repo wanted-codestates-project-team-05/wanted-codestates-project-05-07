@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export function DataNav(dataLength) {
-  // function handlerClick() {
-  //   window.location.replace('/home');
-  // }
   const num = dataLength.num;
 
   return (
