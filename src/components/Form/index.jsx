@@ -61,16 +61,31 @@ const BtnWrapper = styled.div`
 `;
 
 export default function Form() {
+  const [form, setForm] = useState({ title: "", fields: [] });
   const [title, setTitle] = useState("");
   const [count, setCount] = useState(0);
   const [field, setField] = useState([]);
 
+  const handleRemove = (id) => {
+    setField((prev) => prev.filter((item) => item.index !== id));
+  };
+
   const handleAdd = () => {
-    setCount((prev) => prev + 1);
     setField((prev) => [
       ...prev,
-      { content: <Field key={count} />, index: count },
+      {
+        content: (
+          <Field
+            key={count}
+            id={count}
+            setForm={setForm}
+            handleRemove={handleRemove}
+          />
+        ),
+        index: count,
+      },
     ]);
+    setCount((prev) => prev + 1);
   };
 
   return (

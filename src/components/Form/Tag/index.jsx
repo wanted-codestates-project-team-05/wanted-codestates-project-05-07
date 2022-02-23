@@ -31,14 +31,14 @@ const TagBox = styled.div`
   }
 `;
 
-export default function Tag(tags, setTags) {
+export default function Tag({ tag, setTag }) {
   const [input, setInput] = useState("");
 
   const handleKeyDown = (e) => {
     if (e.key !== ",") return;
     e.preventDefault();
     if (input) {
-      setTags((prev) => [
+      setTag((prev) => [
         ...prev,
         {
           content: input,
@@ -51,12 +51,12 @@ export default function Tag(tags, setTags) {
 
   return (
     <Container>
-      {tags?.map((tag) => (
+      {tag?.map((tag) => (
         <TagBox key={tag.id}>
           <span>{tag.content}</span>
           <div
             onClick={(e) => {
-              setTags((prev) => prev.filter((item) => item.id !== tag.id));
+              setTag((prev) => prev.filter((item) => item.id !== tag.id));
             }}
           >
             X

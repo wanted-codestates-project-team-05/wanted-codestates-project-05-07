@@ -13,16 +13,34 @@ import {
   TextArea,
 } from "./styles";
 
-export default function Field() {
+export default function Field({ id, setForm, handleRemove }) {
+  const [data, setData] = useState({});
   const [type, setType] = useState("");
   const [label, setLabel] = useState("");
-  const [tags, setTags] = useState([]);
+  const [option, setOption] = useState([]);
   const [desc, setDesc] = useState("");
   const [text, setText] = useState("");
   const [required, setRequired] = useState(false);
+  const [draggable, setDraggable] = useState(false);
+
+  const handleClick = () => {
+    handleRemove(id);
+  };
+
+  useEffect(() => {
+    setData({
+      id,
+      type,
+      label,
+      option,
+      desc,
+      placeholder: text,
+      required,
+    });
+  }, [id, desc, label, option, required, text, type]);
 
   return (
-    <Container>
+    <Container draggable={draggable}>
       <FirstBox>
         <SelectBox>
           <select onChange={(e) => setType(e.target.value)}>
@@ -53,8 +71,13 @@ export default function Field() {
             필수
           </label>
         </Check>
-        <DragBox>↕</DragBox>
-        <CloseBtn>x</CloseBtn>
+        <DragBox
+          onDrag={() => setDraggable(true)}
+          onDragEnd={() => setDraggable(false)}
+        >
+          <span draggable={false}>↕</span>
+        </DragBox>
+        <CloseBtn onClick={handleClick}>x</CloseBtn>
       </FirstBox>
       {type === "text" || type === "phone" || type === "select" ? (
         <Middle>
@@ -66,7 +89,7 @@ export default function Field() {
           ) : (
             ""
           )}
-          {type === "select" ? <Tag tags={tags} setTags={setTags} /> : ""}
+          {type === "select" ? <Tag tag={option} setTag={setOption} /> : ""}
         </Middle>
       ) : (
         ""
