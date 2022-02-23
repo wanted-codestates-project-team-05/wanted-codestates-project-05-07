@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 600px;
-  min-width: 480px;
   border-radius: 7px;
   border: 1px solid lightgray;
   margin-bottom: 2px;
@@ -23,6 +22,7 @@ export const FirstBox = styled.div`
 export const SelectBox = styled.div`
   width: 25%;
   height: 100%;
+  min-width: 80px;
   border-radius: 7px 0 0 0;
   border-right: 1px solid lightgray;
   & > select {
@@ -57,6 +57,7 @@ export const CloseBtn = styled.button`
 
 export const DragBox = styled.div`
   width: 8%;
+  min-width: 35px;
   border-right: 1px solid lightgray;
   display: flex;
   justify-content: center;
@@ -74,6 +75,7 @@ export const Check = styled.div`
   justify-content: center;
   align-items: center;
   width: 13%;
+  min-width: 70px;
 `;
 
 export const Middle = styled.div`

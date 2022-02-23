@@ -8,7 +8,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 600px;
-  min-width: 480px;
 `;
 
 const FeildWrapper = styled.div`
