@@ -1,128 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { DataNav } from './DataNav';
 import { DataCard } from './DataCard';
 import { Pagination } from './Pagination';
 
-const DataList = () =>  {
+const DataList = ({dataList, setDataList}) =>  {
 
-  const fakeData = [
-    {
-      name: 'test1',
-      phone: '010-1111-1111',
-      address: 'seoul',
-      fileName: 'file1',
-      options: 'r'
-    },{
-      name: 'test2',
-      phone: '010-2222-2222',
-      address: 'seoul',
-      fileName: 'file2',
-      options: 'q'
-    },{
-      name: 'test3',
-      phone: '010-3333-3333',
-      address: 'seoul',
-      fileName: 'file3',
-      options: 'a'
-    },{
-      name: 'test4',
-      phone: '010-4444-4444',
-      address: 'seoul',
-      fileName: 'file4',
-      options: 'b'
-    },{
-      name: 'test4',
-      phone: '010-4444-4444',
-      address: 'seoul',
-      fileName: 'file4',
-      options: 'b'
-    },{
-      name: 'test4',
-      phone: '010-4444-4444',
-      address: 'seoul',
-      fileName: 'file4',
-      options: 'b'
-    },{
-      name: 'test4',
-      phone: '010-4444-4444',
-      address: 'seoul',
-      fileName: 'file4',
-      options: 'b'
-    },{
-      name: 'test4',
-      phone: '010-4444-4444',
-      address: 'seoul',
-      fileName: 'file4',
-      options: 'b'
-    },{
-      name: 'test4',
-      phone: '010-4444-4444',
-      address: 'seoul',
-      fileName: 'file4',
-      options: 'b'
-    },{
-      name: 'test4',
-      phone: '010-4444-4444',
-      address: 'seoul',
-      fileName: 'file4',
-      options: 'b'
-    },{
-      name: 'test4',
-      phone: '010-4444-4444',
-      address: 'seoul',
-      fileName: 'file4',
-      options: 'b'
-    },{
-      name: 'test4',
-      phone: '010-4444-4444',
-      address: 'seoul',
-      fileName: 'file4',
-      options: 'b'
-    },{
-      name: 'test1',
-      phone: '010-1111-1111',
-      address: 'seoul',
-      fileName: 'file1',
-      options: 'r'
-    },{
-      name: 'test2',
-      phone: '010-2222-2222',
-      address: 'seoul',
-      fileName: 'file2',
-      options: 'q'
-    },{
-      name: 'test3',
-      phone: '010-3333-3333',
-      address: 'seoul',
-      fileName: 'file3',
-      options: 'a'
-    }
-  ]
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPerPage, setCurrentPerPage] = useState(10);
   const endPage = currentPage * currentPerPage - 1;
   const startPage = currentPage * currentPerPage - currentPerPage;
 
+  useEffect(() => {
+    setDataList(dataList)
+  },[dataList, setDataList])
+
   return (
     <DataListContainer>
       <DataItemList>
-        {fakeData && fakeData
+        {dataList && dataList
         .filter((item, index) => index <= endPage && index >= startPage )
-        .map((item)=> (
-          <div className='card'>
+        .map((item, key)=> (
+          <div className='card' key={key}>
             <DataCard 
               name={item.name} 
               phone={item.phone} 
               address={item.address} 
-              options={item.options}
-              fileName={item.fileName}
+              options={item.input_0}
+              // fileName={item.fileName}
             />
           </div>
         ))}
       </DataItemList>
       <Pagination 
-        totalItem={fakeData.length} 
+        totalItem={dataList.length} 
         perPage={currentPerPage} 
         currentPage={currentPage} 
         setCurrentPage={setCurrentPage}

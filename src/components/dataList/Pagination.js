@@ -14,7 +14,8 @@ export const Pagination = (props) => {
 	return (
 		<Conatiner>
 			{[...Array(totalPage)].map((page, index) => (
-				<div 
+				<div
+					key={index}
 					className={`page ${currentPage === index+1 ? 'active' : ''}`}
 					onClick={() => handlePage(index+1)}
 				>{index+1}</div>

@@ -7,10 +7,10 @@ export function DataNav({moveDataListPage, moveFormListPage, show}) {
     <DataHeader>
       <ul>
         <li className={`li-first ${show ? '' : 'active'}`}  onClick={moveFormListPage}>
-          <p>formList</p>
+          <p>폼 생성 목록</p>
         </li>
         <li className={`li-first ${show ? 'active' : ''}`} onClick={moveDataListPage}>
-          <p>dataList</p>
+          <p>데이터 목록</p>
         </li>
       </ul>
     </DataHeader>

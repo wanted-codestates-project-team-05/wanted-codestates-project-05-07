@@ -63,8 +63,9 @@ const Icon = styled.div`
   justify-content: center;
 `;
 
-export default function FormList() {
-  const [forms, setForms] = useState([]);
+export default function FormList({forms, setForms}) {
+
+  // const [forms, setForms] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [formsPerPage] = useState(5);
 
@@ -75,17 +76,17 @@ export default function FormList() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    setForms(dummyForms);
-  }, []);
+    setForms(forms)
+  },[forms, setForms])
 
   return (
     <Background>
-      <Title>폼 생성 목록</Title>
+      {/* <Title>폼 생성 목록</Title> */}
       <Container>
         {currentForms.map((each) => (
           <ListItem key={each.id}>
             <Icon>
-              {/* <ion-icon name="document-text" /> */}
+              <ion-icon name="document-text" />
             </Icon>
             <ListTitle>{each.title}</ListTitle>
           </ListItem>
