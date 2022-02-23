@@ -15,13 +15,23 @@ export const DataCard = (props) => {
 		)
 	}
 
+	const ImageBox = (label, data) => {
+
+		return (
+			<div className='data-box'>
+				<div className='label'>{label}</div>
+				<img className='data' src={data} style={{height: '40px'}}/>
+			</div>
+		)
+	}
+
 	return (
 		<Container>
 			{name ? Box('이름', name) : ''}
 			{phone ? Box('휴대폰', phone) : ''}
 			{address ? Box('주소', address) : ''}
 			{options ? Box('옵션', options) : ''}
-			{fileName ? Box('첨부파일', fileName) : ''}
+			{fileName ? ImageBox('첨부파일', fileName) : ''}
 		</Container>
 	)
 }
@@ -65,6 +75,5 @@ const Container = styled.div`
 			/* border: 1px solid lightgray; */
 			background-color: #f8f9fa;
 		}
-
 	}
 `

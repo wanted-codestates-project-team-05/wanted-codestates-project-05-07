@@ -5,9 +5,11 @@ import SubmitButton from "./SubmitButton";
 import { submitForm } from "./submitForm";
 import { InputBox, SelectBox, AgreementBox } from "./formItems";
 import PhotoInput from "./PhotoInput";
+import { unstable_HistoryRouter, useNavigate } from 'react-router-dom';
 
-const CreatedForm = ({ newForm, setFormAnswer }) => {
+const CreatedForm = ({ newForm, setFormAnswer, currentDataList }) => {
   const [address, setAddress] = useState("");
+  const history = useNavigate();
 
   const [user, setUser] = useState({
     name: "",
@@ -115,7 +117,8 @@ const CreatedForm = ({ newForm, setFormAnswer }) => {
       .then((result) => {
         console.log("제출 성공: ", result);
         setIsSubmit(true);
-        setFormAnswer(result);
+        setFormAnswer([...currentDataList, result]);
+        history('/');
       })
       .catch((error) => console.log("제출 실패: ", error));
   };

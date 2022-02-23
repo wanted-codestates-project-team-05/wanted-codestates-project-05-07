@@ -12,18 +12,19 @@ import Form from "./components/Form";
 
 function App() {
   const [forms, setForms] = useState([]);
+  const [currentForm, setCurrentForm] = useState();
   const [dataList, setDataList] = useState(dummyResponse);
   const [clickId, setClickId] = useState(0);
 
   useEffect(() => {
     setDataList(dummyResponse);
   }, []);
+
   useEffect(() => {
     setForms(dummyForms);
   }, []);
 
   const [formAnswer, setFormAnswer] = useState();
-
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -45,7 +46,7 @@ function App() {
             element={
               <CreatedForm
                 newForm={dummyForms[clickId]}
-                setFormAnswer={setFormAnswer}
+                setFormAnswer={setDataList}
               />
             }
           />

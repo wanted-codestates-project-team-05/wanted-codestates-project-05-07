@@ -27,7 +27,7 @@ const DataList = ({dataList, setDataList}) =>  {
               phone={item.phone} 
               address={item.address} 
               options={item.input_0}
-              // fileName={item.fileName}
+              fileName={item.input_1}
             />
           </div>
         ))}
