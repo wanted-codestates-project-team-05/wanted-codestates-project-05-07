@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FormList from "./FormList";
-import { InputBox, SelectBox, AgreementBox } from "./hooks";
 import AddressInput from "./AddressInput";
 import SubmitButton from "./SubmitButton";
 import { submitForm } from "./submitForm";
-import { InputBox, SelectBox, AgreementBox, FileBox } from "./formItems";
+import { InputBox, SelectBox, AgreementBox } from "./formItems";
 import PhotoInput from "./PhotoInput";
 
 const Wrapper = styled.div`
@@ -34,17 +33,6 @@ const Footer = styled.footer`
   left: 0;
   height: 80px;
   width: 100vw;
-`;
-const Submit = styled.input`
-  width: 400px;
-  height: 50px;
-  background-color: #eb4d4b;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
 `;
 
 const AlertMessage = styled.span`
@@ -226,7 +214,7 @@ function SubForm() {
                 value={user[form.id]}
                 onChange={optionHandler}
                 options={form.options}
-              ></SelectBox>
+              />
             )}
             {form.id === "input_1" && (
               <PhotoInput
