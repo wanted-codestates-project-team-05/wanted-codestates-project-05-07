@@ -1,26 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import DataList from './components/dataList/DataList';
+// import Form from './components/form/Form';
+// import CreatedForm from './components/createdFormst/CreatedForm';
+import FormList from './components/formList/FormList';
 
 function App() {
   return (
-    <div>
-      <DataList/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<FormList />}></Route>
+        <Route path="/dataList" element={<DataList />}></Route>
+        {/* <Route path="/form" element={<Form />}></Route>
+        <Route path="/createdForm" element={<CreatedForm />}></Route> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
