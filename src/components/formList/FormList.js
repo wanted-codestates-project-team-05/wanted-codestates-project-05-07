@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Pagination from "../commonComponents/Pagination";
+import Pagination from "../CommonComponents/Pagination";
 
 const Background = styled.div`
   width: 100vw;
@@ -62,8 +62,7 @@ const Icon = styled.div`
   justify-content: center;
 `;
 
-export default function FormList({forms, setForms}) {
-
+export default function FormList({ forms, setForms }) {
   // const [forms, setForms] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [formsPerPage] = useState(5);
@@ -75,8 +74,8 @@ export default function FormList({forms, setForms}) {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    setForms(forms)
-  },[forms, setForms])
+    setForms(forms);
+  }, [forms, setForms]);
 
   return (
     <Background>
@@ -84,7 +83,9 @@ export default function FormList({forms, setForms}) {
       <Container>
         {currentForms.map((each) => (
           <ListItem key={each.id}>
-            <Icon>{/* <ion-icon name="document-text" /> */}</Icon>
+            <Icon>
+              <ion-icon name="document-text" />
+            </Icon>
             <ListTitle>{each.title}</ListTitle>
           </ListItem>
         ))}
