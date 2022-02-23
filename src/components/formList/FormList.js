@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Pagination from "../commonComponents/Pagination";
+import { useNavigate } from "react-router";
 
 const Background = styled.div`
   width: 100vw;
@@ -62,8 +63,7 @@ const Icon = styled.div`
   justify-content: center;
 `;
 
-export default function FormList({forms, setForms}) {
-
+export default function FormList({ forms, setForms, setClickId }) {
   // const [forms, setForms] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [formsPerPage] = useState(5);
@@ -73,17 +73,23 @@ export default function FormList({forms, setForms}) {
   const currentForms = forms.slice(indexOfFirstForm, indexOfLastForm);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  let navigate = useNavigate();
+
+  const handleClick = (id) => {
+    setClickId(id);
+    navigate(`/createdForm`);
+  };
 
   useEffect(() => {
-    setForms(forms)
-  },[forms, setForms])
+    setForms(forms);
+  }, [forms, setForms]);
 
   return (
     <Background>
       {/* <Title>폼 생성 목록</Title> */}
       <Container>
         {currentForms.map((each) => (
-          <ListItem key={each.id}>
+          <ListItem key={each.id} onClick={(each) => handleClick(each.id)}>
             <Icon>{/* <ion-icon name="document-text" /> */}</Icon>
             <ListTitle>{each.title}</ListTitle>
           </ListItem>

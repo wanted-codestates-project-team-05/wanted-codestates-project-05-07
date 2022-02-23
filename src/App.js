@@ -7,22 +7,23 @@ import CreatedForm from "./components/createdForm/CreatedForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./Home";
 import { dummyResponse, dummyForms } from "./data/dummies";
-import { newForm } from "./components/createdForm/FormData";
 import AgreementForm from "./components/createdForm/AgreementForm";
 
 function App() {
   const [forms, setForms] = useState([]);
   const [dataList, setDataList] = useState(dummyResponse);
+  const [createdFormData, setCreatedFormData] = useState(dummyForms[0]);
+  const [clickId, setClickId] = useState(0);
 
   useEffect(() => {
     setDataList(dummyResponse);
   }, []);
-
   useEffect(() => {
     setForms(dummyForms);
   }, []);
 
   const [formAnswer, setFormAnswer] = useState();
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -35,13 +36,17 @@ function App() {
                 setDataList={setDataList}
                 forms={forms}
                 setForms={setForms}
+                setClickId={setClickId}
               />
             }
           />
           <Route
             path="/createdForm"
             element={
-              <CreatedForm newForm={newForm} setFormAnswer={setFormAnswer} />
+              <CreatedForm
+                newForm={createdFormData}
+                setFormAnswer={setFormAnswer}
+              />
             }
           />
           <Route
