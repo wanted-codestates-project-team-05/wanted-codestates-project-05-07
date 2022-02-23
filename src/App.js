@@ -7,6 +7,7 @@ import CreatedForm from "./components/createdForm/CreatedForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DataList from "./components/dataList/DataList";
 import { newForm } from "./components/createdForm/FormData";
+import AgreementForm from "./components/createdForm/AgreementForm";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
           <Route
             path="/createdForm"
             element={<CreatedForm newForm={newForm} />}
+          />
+          <Route
+            path="/createdForm/openAgreement"
+            element={<AgreementForm />}
           />
           <Route path="/dataList" element={<DataList />} />
         </Routes>
