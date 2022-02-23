@@ -25,10 +25,12 @@ export const Pagination = (props) => {
 const Conatiner = styled.div`
 	max-width: 300px;
 	width: auto;
-	height: 50px;
+	height: auto;
 	display: flex;
 	justify-content: center;
 	margin: 0 auto;
+	box-sizing: border-box;
+	padding: 5px;
 
 	.page {
 		width: 30px;
@@ -36,10 +38,15 @@ const Conatiner = styled.div`
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		color: lightgray;
+		background-color: #f8f9fa;
+		border-radius: 5px;
 		cursor: pointer;
+		margin-left: 2px;
+		margin-right: 2px;
 	}
 
 	.active {
-		color: white;
+		color: black;
 	}
 `

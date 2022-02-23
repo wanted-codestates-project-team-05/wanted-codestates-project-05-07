@@ -104,7 +104,7 @@ const DataList = () =>  {
   const endPage = currentPage * currentPerPage - 1;
   const startPage = currentPage * currentPerPage - currentPerPage;
   let dataLength = fakeData.length;
-  
+
   return (
     <DataListContainer>
       <DataNav num={dataLength} />
@@ -135,15 +135,16 @@ const DataList = () =>  {
 
 const DataListContainer = styled.div`
   background-color: #E2C4C9;
-  height: 100vh;
+  height: auto;
+  min-height: calc(100vh + 5px);
 `;
 
 const DataItemList = styled.article`
-  width: 92%;
+  width: calc(250px * 5 + 40px);
   min-height: calc(100vh - 550px);
   height: auto;
   background-color: #fff;
-  margin: 5em auto 0;
+  margin: 3em auto 0;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.07) 1.95px 1.95px 2.6px;
   padding: 20px;
@@ -153,6 +154,14 @@ const DataItemList = styled.article`
     margin-right: 10px;
     margin-bottom: 10px;
   }
+
+  @media (max-width: 1350px) {
+    width: calc(250px * 4 + 40px);
+  }
+  @media (max-width: 1080px) {
+    width: calc(250px * 3 + 40px);
+  }
+
 `;
 
 export default DataList;
