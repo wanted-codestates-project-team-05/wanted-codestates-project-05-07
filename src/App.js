@@ -13,6 +13,7 @@ function App() {
         <Route path="/" element={<FormList />}></Route>
         <Route path="/dataList" element={<DataList />}></Route>
         {/* <Route path="/form" element={<Form />}></Route>
+        {/* <Route path="/form/:id" element={<Form />}></Route>
         <Route path="/createdForm" element={<CreatedForm />}></Route> */}
       </Routes>
     </BrowserRouter>
