@@ -10,7 +10,7 @@ const AddressModal = ({ isModalOpen, onModalClose, modalRef, getAddress }) => {
     onModalClose();
   };
   return (
-    <div>
+    <ModalContainer>
       <BlackOut isModalOpen={isModalOpen} onClick={onModalClose} />
       <Modal
         ref={modalRef}
@@ -31,7 +31,7 @@ const AddressModal = ({ isModalOpen, onModalClose, modalRef, getAddress }) => {
           />
         ) : null}
       </Modal>
-    </div>
+    </ModalContainer>
   );
 };
 
@@ -47,6 +47,8 @@ AddressModal.defaultProps = {
 
 export default AddressModal;
 
+const ModalContainer = styled.div``;
+
 const BlackOut = styled.div`
   position: absolute;
   z-index: 0;
@@ -56,24 +58,33 @@ const BlackOut = styled.div`
   height: 100%;
   background-color: black;
   opacity: 0.4;
-  display: ${({ isModalOpen }) => (isModalOpen ? "block" : "none")};
+  display: none;
+  @media ${({ theme }) => theme.device.nonLaptop} {
+    display: ${({ isModalOpen }) => (isModalOpen ? "block" : "none")};
+  }
 `;
 
 const Modal = styled.div`
+  width: 100%;
+  top: 0;
+  left: 0;
+  transform: translate(0, 0);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   opacity: ${({ isModalOpen }) => (isModalOpen ? 1 : 0)};
   pointer-events: ${({ isModalOpen }) => (isModalOpen ? "auto" : "none")};
-  width: 768px;
-  height: 492px;
   background-color: white;
   z-index: 999;
+  @media ${({ theme }) => theme.device.nonLaptop} {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 768px;
+    height: 492px;
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -94,6 +105,6 @@ const Text = styled.p`
 `;
 
 const postCodeStyle = {
-  maxWidth: "768px",
+  maxWidth: "100%",
   height: "492px",
 };

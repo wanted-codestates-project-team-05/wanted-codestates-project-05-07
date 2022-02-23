@@ -7,6 +7,7 @@ const deviceSizes = {
 const device = {
   mobile: `screen and (max-width: ${deviceSizes.mobile})`,
   tablet: `screen and (max-width: ${deviceSizes.tablet})`,
+  nonLaptop: `screen and (min-width: ${deviceSizes.laptop})`,
   laptop: `screen and (max-width: ${deviceSizes.laptop})`,
 };
 
