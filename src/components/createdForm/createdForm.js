@@ -52,6 +52,7 @@ const CreatedForm = () => {
 export default CreatedForm;
 
 const Wrap = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,7 +67,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  width: 400px;
+  width: 300px;
   border: 1px solid black;
   border-radius: 10px;
   padding: 10px;
