@@ -61,10 +61,18 @@ const BtnWrapper = styled.div`
 `;
 
 export default function Form() {
-  const [form, setForm] = useState({ title: "", fields: [] });
+  const [formData, setFormData] = useState({ title: "", fieldData: [] });
+  const [fieldData, setFieldData] = useState([]);
   const [title, setTitle] = useState("");
   const [count, setCount] = useState(0);
   const [field, setField] = useState([]);
+
+  const saveData = () => {
+    setFormData({
+      title,
+      fieldData,
+    });
+  };
 
   const handleRemove = (id) => {
     setField((prev) => prev.filter((item) => item.index !== id));
@@ -78,8 +86,8 @@ export default function Form() {
           <Field
             key={count}
             id={count}
-            setForm={setForm}
             handleRemove={handleRemove}
+            setFieldData={setFieldData}
           />
         ),
         index: count,
@@ -87,6 +95,10 @@ export default function Form() {
     ]);
     setCount((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    console.log(fieldData);
+  }, [fieldData]);
 
   return (
     <Container>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Tag from "../Tag";
+import TextEditor from "../TextEditor";
 import {
   Check,
   CloseBtn,
@@ -10,10 +11,9 @@ import {
   LabelBox,
   Middle,
   SelectBox,
-  TextArea,
 } from "./styles";
 
-export default function Field({ id, setForm, handleRemove }) {
+export default function Field({ id, handleRemove, setFieldData }) {
   const [data, setData] = useState({});
   const [type, setType] = useState("");
   const [label, setLabel] = useState("");
@@ -21,9 +21,9 @@ export default function Field({ id, setForm, handleRemove }) {
   const [desc, setDesc] = useState("");
   const [text, setText] = useState("");
   const [required, setRequired] = useState(false);
-  const [draggable, setDraggable] = useState(false);
 
   const handleClick = () => {
+    setFieldData((prev) => prev.filter((item) => item.id !== id));
     handleRemove(id);
   };
 
@@ -39,8 +39,15 @@ export default function Field({ id, setForm, handleRemove }) {
     });
   }, [id, desc, label, option, required, text, type]);
 
+  useEffect(() => {
+    // @ts-ignore
+    if (typeof data.id === "number") {
+      setFieldData((prev) => [...prev.filter((item) => item.id !== id), data]);
+    }
+  });
+
   return (
-    <Container draggable={draggable}>
+    <Container>
       <FirstBox>
         <SelectBox>
           <select onChange={(e) => setType(e.target.value)}>
@@ -71,11 +78,8 @@ export default function Field({ id, setForm, handleRemove }) {
             필수
           </label>
         </Check>
-        <DragBox
-          onDrag={() => setDraggable(true)}
-          onDragEnd={() => setDraggable(false)}
-        >
-          <span draggable={false}>↕</span>
+        <DragBox>
+          <span>↕</span>
         </DragBox>
         <CloseBtn onClick={handleClick}>x</CloseBtn>
       </FirstBox>
@@ -94,10 +98,7 @@ export default function Field({ id, setForm, handleRemove }) {
       ) : (
         ""
       )}
-      <TextArea
-        placeholder="설명을 입력하세요"
-        onChange={(e) => setDesc(e.target.value)}
-      />
+      <TextEditor setDesc={setDesc} />
     </Container>
   );
 }

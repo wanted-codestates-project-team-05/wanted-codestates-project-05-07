@@ -83,6 +83,7 @@ export const Middle = styled.div`
 
 export const Input = styled.input`
   width: 100%;
+  height: 30px;
   padding: 5px 10px;
   border: none;
   outline: none;
