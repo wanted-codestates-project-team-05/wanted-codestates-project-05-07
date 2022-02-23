@@ -1,8 +1,9 @@
-// import React from "react";
-import React, { components, useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Select from "react-select";
 import { VscChevronRight } from "react-icons/vsc";
+import { AiFillCheckCircle } from "react-icons/ai";
+import { GiCircle } from "react-icons/gi";
 
 const Label = styled.span`
   font-size: 18px;
@@ -24,30 +25,7 @@ const Input = styled.input`
     font-size: 16px;
   }
 `;
-// const Select = styled(Input)`
-//   padding: 0 20px;
-//   -webkit-appearance: none; /* 네이티브 외형 감추기 */
-//   -moz-appearance: none;
-//   appearance: none;
-//   background: url(${donw}) no-repeat 95% 50%;
-//   &:option {
-//     border: 2px solid red;
-//   }
-// `;
-// const Option = styled.option`
-//   border-bottom: 1px dashed rgb(170, 72, 72);
-//   padding: 5px 15px 5px;
-//   transition: 0.1s;
-// `;
 
-const Argeement = styled.input`
-  border: 1px solid #999;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  margin-right: 10px;
-  cursor: "pointer";
-`;
 export const InputBox = ({
   label,
   nameMessage,
@@ -76,13 +54,6 @@ export const InputBox = ({
   );
 };
 
-const options = [
-  { value: "S", label: "S" },
-  { value: "M", label: "M" },
-  { value: "L", label: "L" },
-  { value: "XL", label: "XL" },
-];
-
 export const SelectBox = ({
   label,
   id,
@@ -90,45 +61,55 @@ export const SelectBox = ({
   required,
   value,
   onChange,
-  // options,
+  options,
 }) => {
+  const obj = options.map((e) => {
+    return { value: e, label: e };
+  });
+
   return (
-    <Label>
+    <Label
+      style={{
+        zIndex: 10,
+      }}
+    >
       {label}
       <Select
         id={id}
         type={type}
         value={value}
         required={required}
-        options={options}
+        options={obj}
         onChange={onChange}
+        placeholder=""
       ></Select>
     </Label>
   );
 };
 
-export const AgreementBox = ({
-  label,
-  id,
-  type,
-  required,
-  placeholder,
-  value,
-  onClick,
-  options,
-}) => {
+export const AgreementBox = ({ label, onClick, agreement }) => {
   return (
     <Label style={{ flexDirection: "row", alignItems: "center" }}>
-      <Argeement
-        options={options}
-        id={id}
-        type={type}
-        required={required}
-        placeholder={placeholder}
-        value={value}
-        onClick={onClick}
-      ></Argeement>
-      {label} (필수)
+      {agreement ? (
+        <AiFillCheckCircle
+          onClick={onClick}
+          size="24"
+          style={{
+            marginRight: 10,
+            color: "#eb4d4b",
+          }}
+        />
+      ) : (
+        <GiCircle
+          onClick={onClick}
+          size="24"
+          style={{
+            marginRight: 10,
+          }}
+        />
+      )}
+
+      {`${label} (필수)`}
       <VscChevronRight
         style={{
           marginLeft: 130,

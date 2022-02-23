@@ -5,6 +5,8 @@ import { InputBox, SelectBox, AgreementBox } from "./hooks";
 import AddressInput from "./AddressInput";
 import SubmitButton from "./SubmitButton";
 import { submitForm } from "./submitForm";
+import { InputBox, SelectBox, AgreementBox, FileBox } from "./formItems";
+import PhotoInput from "./PhotoInput";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -13,13 +15,12 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 const Title = styled.h3`
+  margin-top: 20px;
   font-size: 20px;
 `;
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
+const Form = styled.form``;
+
 const InputList = styled.div`
   display: flex;
   flex-direction: column;
@@ -33,7 +34,6 @@ const Footer = styled.footer`
   left: 0;
   height: 80px;
   width: 100vw;
-  box-shadow: 2px 2px 2px green;
 `;
 const Submit = styled.input`
   width: 400px;
@@ -45,14 +45,12 @@ const Submit = styled.input`
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  &:hover {
-    background-color: #eb4d4b;
-  }
 `;
 
 const AlertMessage = styled.span`
   font-size: 12px;
   color: red;
+  margin-top: 5px;
   padding-left: 10px;
 `;
 
@@ -69,9 +67,11 @@ function SubForm() {
     option: "",
     file: "",
   });
+
   //오류메시지 상태저장
   const [nameMessage, setNameMessage] = useState("");
   const [phoneMessage, setPhoneMessage] = useState("");
+
   // 유효성 검사
   const [isName, setIsName] = useState(false);
   const [isPhone, setIsPhone] = useState(false);
@@ -229,7 +229,7 @@ function SubForm() {
               ></SelectBox>
             )}
             {form.id === "input_1" && (
-              <InputBox
+              <PhotoInput
                 label={form.label}
                 id={form.id}
                 type={form.type}
@@ -245,6 +245,7 @@ function SubForm() {
                 required={form.required}
                 value={user[form.id]}
                 onClick={agreementHandler}
+                agreement={agreement}
               />
             )}
           </InputList>
