@@ -14,7 +14,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<FormList />} />
+          <Route path="/" element={<SubForm />} />
           <Route path="/dataList" element={<DataList />} />
           {/*<AddressInput />*/}
           {/* <Route path="/form" element={<Form />}></Route> */}
