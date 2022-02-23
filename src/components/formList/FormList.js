@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { dummyForms } from "../../data/dummies";
-import Pagination from "../commonComponents/Pagination";
+import Pagination from "../CommonComponents/Pagination";
 
 const Background = styled.div`
   width: 100vw;
@@ -84,9 +84,7 @@ export default function FormList() {
       <Container>
         {currentForms.map((each) => (
           <ListItem key={each.id}>
-            <Icon>
-              <ion-icon name="document-text" />
-            </Icon>
+            <Icon>{/* <ion-icon name="document-text" /> */}</Icon>
             <ListTitle>{each.title}</ListTitle>
           </ListItem>
         ))}
