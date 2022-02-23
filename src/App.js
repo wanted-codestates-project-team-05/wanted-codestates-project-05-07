@@ -12,7 +12,6 @@ import AgreementForm from "./components/createdForm/AgreementForm";
 function App() {
   const [forms, setForms] = useState([]);
   const [dataList, setDataList] = useState(dummyResponse);
-  const [createdFormData, setCreatedFormData] = useState(dummyForms[0]);
   const [clickId, setClickId] = useState(0);
 
   useEffect(() => {
@@ -44,7 +43,7 @@ function App() {
             path="/createdForm"
             element={
               <CreatedForm
-                newForm={createdFormData}
+                newForm={dummyForms[clickId]}
                 setFormAnswer={setFormAnswer}
               />
             }

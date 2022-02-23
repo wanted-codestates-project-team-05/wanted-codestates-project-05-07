@@ -77,6 +77,7 @@ export default function FormList({ forms, setForms, setClickId }) {
 
   const handleClick = (id) => {
     setClickId(id);
+    console.log(id);
     navigate(`/createdForm`);
   };
 
@@ -89,7 +90,7 @@ export default function FormList({ forms, setForms, setClickId }) {
       {/* <Title>폼 생성 목록</Title> */}
       <Container>
         {currentForms.map((each) => (
-          <ListItem key={each.id} onClick={(each) => handleClick(each.id)}>
+          <ListItem key={each.id} onClick={() => handleClick(each.id - 1)}>
             <Icon>{/* <ion-icon name="document-text" /> */}</Icon>
             <ListTitle>{each.title}</ListTitle>
           </ListItem>
