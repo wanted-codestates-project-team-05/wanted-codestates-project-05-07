@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "./reset.css";
 import { ThemeProvider } from "styled-components";
@@ -9,13 +9,16 @@ import DataList from "./components/dataList/DataList";
 import { newForm } from "./components/createdForm/FormData";
 
 function App() {
+  const [formAnswer, setFormAnswer] = useState();
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route
             path="/createdForm"
-            element={<CreatedForm newForm={newForm} />}
+            element={
+              <CreatedForm newForm={newForm} setFormAnswer={setFormAnswer} />
+            }
           />
           <Route path="/dataList" element={<DataList />} />
         </Routes>

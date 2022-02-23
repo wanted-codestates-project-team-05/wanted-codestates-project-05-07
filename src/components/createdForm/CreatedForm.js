@@ -6,16 +6,14 @@ import { submitForm } from "./submitForm";
 import { InputBox, SelectBox, AgreementBox } from "./formItems";
 import PhotoInput from "./PhotoInput";
 
-const CreatedForm = ({ newForm }) => {
-  const [address, setAddress] = useState("");
-
+const CreatedForm = ({ newForm, setFormAnswer }) => {
   const [user, setUser] = useState({
     name: "",
     phone: "",
     address: "",
-    select: "",
-    option: "",
-    file: "",
+    input_0: "",
+    input_1: "",
+    agreement_0: false,
   });
 
   //오류메시지 상태저장
@@ -44,10 +42,6 @@ const CreatedForm = ({ newForm }) => {
       });
     }
   }, [user.phone]);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
   // nameHandler
   const nameHandler = (e) => {
     const { value } = e.target;
@@ -64,10 +58,10 @@ const CreatedForm = ({ newForm }) => {
   };
   // submit 활성화
   useEffect(() => {
-    if (isName || isPhone || isOption || user.agreement_0 || user.address) {
-      setDisabledSubmit(true);
-    } else {
+    if (isName && isPhone && isOption && user.agreement_0 && user.address) {
       setDisabledSubmit(false);
+    } else {
+      setDisabledSubmit(true);
     }
   }, [isName, isPhone, isOption, user]);
 
@@ -107,17 +101,19 @@ const CreatedForm = ({ newForm }) => {
   //제출하기 버튼 : sh
   const [isSubmit, setIsSubmit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [disabledSubmit, setDisabledSubmit] = useState(false);
+  const [disabledSubmit, setDisabledSubmit] = useState(true);
 
   const handleLoading = (loading) => {
     setIsLoading(loading);
   };
 
-  const handleClickSubmit = () => {
+  const handleClickSubmit = (e) => {
+    e.preventDefault();
     submitForm(user, handleLoading)
       .then((result) => {
         console.log("제출 성공: ", result);
         setIsSubmit(true);
+        setFormAnswer(result);
       })
       .catch((error) => console.log("제출 실패: ", error));
   };
@@ -175,7 +171,7 @@ const CreatedForm = ({ newForm }) => {
             id={form.id}
             type={form.type}
             required={form.required}
-            value={user[form.id]}
+            value={user[form.input_0]}
             onChange={optionHandler}
             options={form.options}
           />

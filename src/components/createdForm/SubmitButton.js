@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from "react";
 import Loading from "./Loading";
 import styled from "styled-components";
@@ -12,9 +11,9 @@ const SubmitButton = ({
   <ButtonContainer>
     <Button
       type="submit"
-      onClick={onClickSubmit}
-      disabled={disabledSubmit}
-      disabledSubmit={disabledSubmit}
+      onClick={(e) => onClickSubmit(e)}
+      disabledBgColor={disabledSubmit}
+      disabled={false}
     >
       {isLoading ? <Loading /> : isSubmit ? "제출완료:)" : "제출하기"}
     </Button>
@@ -42,9 +41,7 @@ const Button = styled.button`
   margin-top: 40px;
   border: none;
   border-radius: 10px;
-  z-index: -1;
   cursor: pointer;
-  // @ts-ignore
-  background-color: ${({ disabledSubmit }) =>
-    disabledSubmit ? "lightGrey" : "#eb4d4b"};
+  background-color: ${({ disabledBgColor }) =>
+    disabledBgColor ? "lightGrey" : "#eb4d4b"};
 `;
