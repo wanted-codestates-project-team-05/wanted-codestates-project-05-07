@@ -1,19 +1,15 @@
 /* 
 1.폼의 양식은 서버에서 내려주며 포맷은 다음과 같습니다.
-3.휴대폰 번호(type = phone)의 경우 올바른 데이터 타입인지 확인합니다.
-
-
 2.모든 필수 폼(required = true)이 올바르게 입력되었을 때 “제출하기” 버튼이 활성화 됩니다.
 (name, phone, address, input_0(옵션), agreement_0(개인정보 수집 및 약관 내용))
+3.휴대폰 번호(type = phone)의 경우 올바른 데이터 타입인지 확인합니다.
 4.파일 첨부 시, 얼마나 업로드 되었는지 프로그레스바를 출력합니다.
 */
-
-// 2. 옵션, 3. 개인정보 수집 약관 동의 (필수)
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FormList from "./FormList";
-import { InputBox, SelectBox, AgreementBox } from "./hooks";
+import { InputBox, SelectBox, AgreementBox } from "./formItems";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -74,6 +70,7 @@ function SubForm() {
     option: "",
     file: "",
   });
+
   //오류메시지 상태저장
   const [nameMessage, setNameMessage] = useState("");
   const [phoneMessage, setPhoneMessage] = useState("");
