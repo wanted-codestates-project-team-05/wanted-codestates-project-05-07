@@ -135,7 +135,7 @@ export default function Form() {
       <P>제목 *</P>
       <InputTitle value={title} onChange={(e) => setTitle(e.target.value)} />
       <P>필드목록 *</P>
-      <FieldWrapper>
+      {/* <FieldWrapper>
         <SortableList useDragHandle onSortEnd={handleSortEnd}>
           {field.map((comp, index) => (
             <SortableItem key={index} index={index}>
@@ -143,7 +143,8 @@ export default function Form() {
             </SortableItem>
           ))}
         </SortableList>
-      </FieldWrapper>
+      </FieldWrapper> */}
+      <FieldWrapper>{field.map((comp) => comp.content)}</FieldWrapper>
       <AddBtn onClick={handleAdd}>필드 추가하기</AddBtn>
       <BtnWrapper>
         <Button>폼열기</Button>

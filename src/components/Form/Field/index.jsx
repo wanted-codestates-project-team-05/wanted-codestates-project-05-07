@@ -83,10 +83,10 @@ export default function Field({ id, handleRemove, setFieldData }) {
             필수
           </label>
         </Check>
-        {/* <DragBox>
+        <DragBox>
           <span>↕</span>
-        </DragBox> */}
-        <DragHandler />
+        </DragBox>
+        {/* <DragHandler /> */}
         <CloseBtn onClick={handleClick}>x</CloseBtn>
       </FirstBox>
       {type === "text" || type === "phone" || type === "select" ? (
