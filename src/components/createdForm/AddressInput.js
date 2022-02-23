@@ -74,10 +74,11 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 const Input = styled.input`
-  width: 400px;
+  width: 100%;
   height: 50px;
   margin-top: 5px;
   border-radius: 12px;

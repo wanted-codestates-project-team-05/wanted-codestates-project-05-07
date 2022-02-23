@@ -5,15 +5,16 @@ import { VscChevronRight } from "react-icons/vsc";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { GiCircle } from "react-icons/gi";
 
-const Label = styled.span`
-  font-size: 18px;
-  font-weight: 500;
+const Label = styled.label`
+  font-weight: 600;
+  font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  margin-bottom: 10px;
 `;
 const Input = styled.input`
-  width: 400px;
+  width: 100%;
   height: 50px;
   margin-top: 5px;
   border-radius: 12px;
@@ -68,11 +69,7 @@ export const SelectBox = ({
   });
 
   return (
-    <Label
-      style={{
-        zIndex: 10,
-      }}
-    >
+    <Label>
       {label}
       <Select
         id={id}
@@ -82,7 +79,7 @@ export const SelectBox = ({
         options={obj}
         onChange={onChange}
         placeholder=""
-      ></Select>
+      />
     </Label>
   );
 };

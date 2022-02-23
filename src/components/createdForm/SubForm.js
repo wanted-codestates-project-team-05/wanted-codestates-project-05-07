@@ -18,7 +18,12 @@ const Title = styled.h3`
   font-size: 20px;
 `;
 
-const Form = styled.form``;
+const Form = styled.form`
+  width: 400px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 90%;
+  }
+`;
 
 const InputList = styled.div`
   display: flex;

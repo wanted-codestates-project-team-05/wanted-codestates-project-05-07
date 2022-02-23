@@ -1,30 +1,31 @@
 import styled, { css, keyframes } from "styled-components";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Label = styled.label`
   cursor: pointer;
   position: relative;
-  width: 360px;
+  width: 400px;
   height: 220px;
   border-radius: 10px;
   border: none;
+  @media ${({ theme }) => theme.device.mobile} {
+    max-width: 100%;
+  }
 `;
 
-const Name = styled.span`
-  font-size: 18px;
-  font-weight: 500;
+const Title = styled.span`
+  font-weight: 600;
+  font-size: 0.75rem;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
-  margin-bottom: 5px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 const Shade = styled.div`
-  z-index: 1;
-  width: 380px;
+  width: 360px;
   height: 180px;
   margin-left: 10px;
-  position: absolute;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, ${(props) => (props.image ? "0.5" : "0.02")});
   border: none;
@@ -34,6 +35,9 @@ const Shade = styled.div`
   color: ${(props) => (props.image ? "#ffffff" : "#858f97")};
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    max-width: 90%;
+  }
 `;
 
 const Icon = styled.span`
@@ -109,7 +113,7 @@ export default function PhotoInput({ label, id, type, required, value }) {
 
   return (
     <Label htmlFor="fileUpload">
-      <Name>{label}</Name>
+      <Title>{label}</Title>
       <Input
         id="fileUpload"
         type="file"
