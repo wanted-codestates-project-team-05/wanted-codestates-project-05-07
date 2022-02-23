@@ -14,7 +14,7 @@ const Label = styled.span`
 `;
 const Input = styled.input`
   width: 400px;
-  height: 50px;
+  height: 60px;
   margin-top: 5px;
   border-radius: 12px;
   border: ${(props) =>

@@ -1,15 +1,10 @@
-/* 
-1.폼의 양식은 서버에서 내려주며 포맷은 다음과 같습니다.
-2.모든 필수 폼(required = true)이 올바르게 입력되었을 때 “제출하기” 버튼이 활성화 됩니다.
-(name, phone, address, input_0(옵션), agreement_0(개인정보 수집 및 약관 내용))
-3.휴대폰 번호(type = phone)의 경우 올바른 데이터 타입인지 확인합니다.
-4.파일 첨부 시, 얼마나 업로드 되었는지 프로그레스바를 출력합니다.
-*/
-
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FormList from "./FormList";
-import { InputBox, SelectBox, AgreementBox, FileBox } from "./formItems";
+import AddressInput from "./AddressInput";
+import SubmitButton from "./SubmitButton";
+import { submitForm } from "./submitForm";
+import { InputBox, SelectBox, AgreementBox } from "./formItems";
 import PhotoInput from "./PhotoInput";
 
 const Wrapper = styled.div`
@@ -23,34 +18,11 @@ const Title = styled.h3`
   font-size: 20px;
 `;
 
-const Form = styled.form`
-  height: 120vh;
-`;
+const Form = styled.form``;
 
 const InputList = styled.div`
   display: flex;
   flex-direction: column;
-`;
-const Footer = styled.footer`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 80px;
-  width: 100vw;
-`;
-const Submit = styled.input`
-  width: 400px;
-  height: 50px;
-  background-color: #eb4d4b;
-  color: white;
-  padding: 14px 20px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
 `;
 
 const AlertMessage = styled.span`
@@ -61,10 +33,14 @@ const AlertMessage = styled.span`
 `;
 
 function SubForm() {
+  //주소 변수 : sh
+  const [address, setAddress] = useState("");
+  // sh
+
   const [user, setUser] = useState({
     name: "",
     phone: "",
-    address: "",
+    address: address,
     select: "",
     option: "",
     file: "",
@@ -77,7 +53,6 @@ function SubForm() {
   // 유효성 검사
   const [isName, setIsName] = useState(false);
   const [isPhone, setIsPhone] = useState(false);
-  const [address, setAddress] = useState(false);
   const [option, setOption] = useState(false);
   const [agreement, setAgreement] = useState(false);
 
@@ -152,7 +127,26 @@ function SubForm() {
       alert("성공");
     }
   };
-  console.log(agreement);
+
+  //제출하기 버튼 : sh
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [disabledSubmit, setDisabledSubmit] = useState(false);
+
+  const handleLoading = (loading) => {
+    setIsLoading(loading);
+  };
+
+  const handleClickSubmit = () => {
+    submitForm("김코딩", "010-4444-4444", "", "s", "", true, handleLoading)
+      .then((result) => {
+        console.log("제출 성공: ", result);
+        setIsSubmit(true);
+      })
+      .catch((error) => console.log("제출 실패: ", error));
+  };
+  //sh 끝
+
   return (
     <Wrapper>
       <Title>데이터블 폼 예시</Title>
@@ -189,13 +183,14 @@ function SubForm() {
               </>
             )}
             {form.id === "address" && (
-              <InputBox
+              <AddressInput
                 label={form.label}
                 nameMessage={nameMessage}
                 id={form.id}
                 type={form.type}
                 required={form.required}
-                value={user[form.id]}
+                value={address}
+                setValue={setAddress}
                 onChange={nameHandler}
               />
             )}
@@ -209,7 +204,7 @@ function SubForm() {
                 value={user[form.id]}
                 onChange={optionHandler}
                 options={form.options}
-              ></SelectBox>
+              />
             )}
             {form.id === "input_1" && (
               <PhotoInput
@@ -233,7 +228,12 @@ function SubForm() {
             )}
           </InputList>
         ))}
-        <Submit type="submit" value="Submit" onClick={formSubmit}></Submit>
+        <SubmitButton
+          onClickSubmit={handleClickSubmit}
+          disabledSubmit={disabledSubmit}
+          isLoading={isLoading}
+          isSubmit={isSubmit}
+        />
       </Form>
     </Wrapper>
   );
