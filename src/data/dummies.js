@@ -1,1 +1,22 @@
-const dummy = "dummy";
+export const dummyForms = [
+  { id: 1, title: "테스트 폼 1" },
+  { id: 2, title: "테스트 폼 2" },
+  { id: 3, title: "테스트 폼 3" },
+  { id: 4, title: "테스트 폼 4" },
+  { id: 5, title: "테스트 폼 5" },
+  { id: 6, title: "테스트 폼 6" },
+  { id: 7, title: "테스트 폼 7" },
+  { id: 8, title: "테스트 폼 8" },
+  { id: 9, title: "테스트 폼 9" },
+  { id: 10, title: "테스트 폼 10" },
+  { id: 11, title: "테스트 폼 11" },
+  { id: 12, title: "테스트 폼 12" },
+  { id: 13, title: "테스트 폼 13" },
+  { id: 14, title: "테스트 폼 14" },
+  { id: 15, title: "테스트 폼 15" },
+  { id: 16, title: "테스트 폼 16" },
+  { id: 17, title: "테스트 폼 17" },
+  { id: 18, title: "테스트 폼 18" },
+  { id: 19, title: "테스트 폼 19" },
+  { id: 20, title: "테스트 폼 20" },
+];
