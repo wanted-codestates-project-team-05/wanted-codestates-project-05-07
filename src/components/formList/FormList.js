@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { dummyForms } from "../../data/dummies";
 import Pagination from "../commonComponents/Pagination";
 
 const Background = styled.div`
