@@ -39,9 +39,9 @@ const AddressInput = ({
       >
         <Input
           type="text"
-          autocorrect="off"
-          autocapitalize="none"
-          autocomplete="off"
+          autoCorrect="off"
+          autoCapitalize="none"
+          autoComplete="off"
           value={value}
           nameMessage={nameMessage}
           id={id}

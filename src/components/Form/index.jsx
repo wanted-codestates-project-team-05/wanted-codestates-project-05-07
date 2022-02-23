@@ -3,16 +3,17 @@ import Field from "./Field";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
-import arrayMove from "array-move";
-
+import { arrayMoveImmutable } from "array-move";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 500px;
+  margin: 20px auto;
 `;
 
-const FieldWrapper = styled.div`
+const FieldWrapper = styled.ul`
   margin-bottom: 5px;
 `;
 
@@ -60,13 +61,11 @@ const BtnWrapper = styled.div`
   justify-content: flex-end;
   gap: 10px;
 `;
-
 const SortableList = SortableContainer(({ children }) => {
   return <FieldWrapper>{children}</FieldWrapper>;
 });
 
 const SortableItem = SortableElement(({ children }) => <>{children}</>);
-
 export default function Form() {
   // const navigate = useNavigate();
   const [formData, setFormData] = useState({ title: "", fieldData: [] });
@@ -105,17 +104,31 @@ export default function Form() {
   };
 
   const handleSave = () => {
-    console.log("first");
-    if (fieldData.filter((item) => item.label === "" || item.type === ""))
-      return;
-    console.log("s");
+    if (title === "") return;
+    if (fieldData.filter((item) => item.label === "").length !== 0) return;
+    if (fieldData.filter((item) => item.type === "").length !== 0) return;
     saveData();
-    // navigate("/");
+    // setTimeout(() => {
+    //   navigate('/')
+    // }, 1000)
   };
 
   useEffect(() => {
     console.log(fieldData);
   }, [fieldData]);
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
+  const handleSortEnd = ({ oldIndex, newIndex }) => {
+    const newField = [...field];
+    const newFieldData = [...fieldData];
+    const arr = arrayMoveImmutable(newField, oldIndex, newIndex);
+    const arr2 = arrayMoveImmutable(newFieldData, oldIndex, newIndex);
+    setField(arr);
+    setFieldData(arr2);
+  };
 
   return (
     <Container>
@@ -123,7 +136,7 @@ export default function Form() {
       <InputTitle value={title} onChange={(e) => setTitle(e.target.value)} />
       <P>필드목록 *</P>
       <FieldWrapper>
-        <SortableList useDragHandle>
+        <SortableList useDragHandle onSortEnd={handleSortEnd}>
           {field.map((comp, index) => (
             <SortableItem key={index} index={index}>
               {comp.content}
