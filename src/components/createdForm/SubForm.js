@@ -23,7 +23,9 @@ const Title = styled.h3`
   font-size: 20px;
 `;
 
-const Form = styled.form``;
+const Form = styled.form`
+  height: 120vh;
+`;
 
 const InputList = styled.div`
   display: flex;
@@ -45,7 +47,7 @@ const Submit = styled.input`
   background-color: #eb4d4b;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin-top: 20px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -231,9 +233,7 @@ function SubForm() {
             )}
           </InputList>
         ))}
-        <Footer>
-          <Submit type="submit" value="Submit" onClick={formSubmit}></Submit>
-        </Footer>
+        <Submit type="submit" value="Submit" onClick={formSubmit}></Submit>
       </Form>
     </Wrapper>
   );
