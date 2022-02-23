@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Pagination from "../CommonComponents/Pagination";
 
@@ -96,7 +97,9 @@ export default function FormList({ forms, setForms }) {
         totalForms={forms.length}
         paginate={paginate}
       />
-      <Button>폼 생성</Button>
+      <Link to="/form">
+        <Button>폼 생성</Button>
+      </Link>
     </Background>
   );
 }
