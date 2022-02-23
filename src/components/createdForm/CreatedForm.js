@@ -1,111 +1,247 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import AddressModal from "./AddressModal";
+import { FormList, newForm } from "./FormList";
+import AddressInput from "./AddressInput";
+import SubmitButton from "./SubmitButton";
 import { submitForm } from "./submitForm";
-import Loading from "./Loading";
+import { InputBox, SelectBox, AgreementBox } from "./formItems";
+import PhotoInput from "./PhotoInput";
 
-const CreatedForm = () => {
-  const [isAddress, setIsAddress] = useState("");
+const Wrapper = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Title = styled.h3`
+  margin-top: 20px;
+  font-size: 20px;
+`;
+
+const Form = styled.form`
+  width: 400px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 90%;
+  }
+`;
+
+const InputList = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const AlertMessage = styled.span`
+  font-size: 12px;
+  color: red;
+  margin-top: 5px;
+  padding-left: 10px;
+`;
+
+function CreatedForm() {
+  //주소 변수 : sh
+  const [address, setAddress] = useState("");
+  // sh
+
+  const [user, setUser] = useState({
+    name: "",
+    phone: "",
+    address: address,
+    select: "",
+    option: "",
+    file: "",
+  });
+
+  //오류메시지 상태저장
+  const [nameMessage, setNameMessage] = useState("");
+  const [phoneMessage, setPhoneMessage] = useState("");
+
+  // 유효성 검사
+  const [isName, setIsName] = useState(false);
+  const [isPhone, setIsPhone] = useState(false);
+  const [option, setOption] = useState(false);
+  const [agreement, setAgreement] = useState(false);
+
+  // phone 하이픈 자동 생성
+  useEffect(() => {
+    if (user.phone.length === 10) {
+      setUser({
+        ...user,
+        phone: user.phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+    if (user.phone.length === 13) {
+      setUser({
+        ...user,
+        phone: user.phone
+          .replace(/-/g, "")
+          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+  }, [user.phone]);
+
+  // nameHandler
+  const nameHandler = (e) => {
+    const { value } = e.target;
+    setUser({
+      ...user,
+      [e.target.id]: value,
+    });
+    if (value === "") {
+      setNameMessage("이름 항목은 필수 정보입니다");
+    } else {
+      setNameMessage("");
+      setIsName(true);
+    }
+  };
+
+  // phoneHandler
+  const phoneHandler = (e) => {
+    const { value } = e.target;
+    const regex = /^[0-9\b -]{0,13}$/;
+    if (regex.test(value)) {
+      setUser({ ...user, phone: value });
+    }
+    if (value === "") {
+      setPhoneMessage("휴대폰 번호 항목은 필수 정보입니다");
+      setIsPhone(false);
+    } else if (!/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/.test(value)) {
+      setPhoneMessage("휴대폰 번호가 올바르지 않습니다.");
+      setIsPhone(false);
+    } else {
+      setPhoneMessage("");
+      setIsPhone(true);
+    }
+  };
+
+  // option
+  const optionHandler = (e) => {
+    setUser({ ...user, option: e.value });
+    setOption(true);
+  };
+
+  // agreement
+  const agreementHandler = () => {
+    setAgreement((prev) => !prev);
+  };
+
+  // formSubmit
+  const formSubmit = () => {
+    if (!isName || !isPhone || !option || !agreement) {
+      alert("필수항목을 입력하세요");
+    } else {
+      alert("성공");
+    }
+  };
+
+  //제출하기 버튼 : sh
   const [isSubmit, setIsSubmit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const getAddress = (address) => {
-    setIsAddress(address);
-  };
+  const [disabledSubmit, setDisabledSubmit] = useState(false);
+
   const handleLoading = (loading) => {
     setIsLoading(loading);
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef(null);
-  const openButtonRef = useRef(null);
-  const handleClickClose = useCallback(() => {
-    setIsModalOpen(true);
-    setTimeout(() => modalRef.current.focus());
-  }, []);
-  const handleClickOpen = useCallback(() => {
-    setIsModalOpen(false);
-    // 모달의 웹 접근성을 위해 시간차를 두고 포커스 이동
-    setTimeout(() => openButtonRef.current.focus());
-  }, []);
+
   const handleClickSubmit = () => {
-    submitForm(
-      "김코딩",
-      "010-4444-4444",
-      isAddress,
-      "s",
-      "",
-      true,
-      handleLoading
-    )
+    submitForm("김코딩", "010-4444-4444", "", "s", "", true, handleLoading)
       .then((result) => {
         console.log("제출 성공: ", result);
         setIsSubmit(true);
       })
       .catch((error) => console.log("제출 실패: ", error));
   };
+  //sh 끝
 
   return (
-    <Wrap>
-      <Fieldset>
-        <Label>배송지</Label>
-        <div
-          ref={openButtonRef}
-          onClick={handleClickClose}
-          aria-haspopup="true"
-          aria-pressed={isModalOpen}
-        >
-          <Input
-            type="text"
-            autocorrect="off"
-            autocapitalize="none"
-            autocomplete="off"
-            value={isAddress}
-          />
-        </div>
-        <ButtonContainer>
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <button onClick={handleClickSubmit}>제출하기</button>
-          )}
-        </ButtonContainer>
-      </Fieldset>
-      <AddressModal
-        isModalOpen={isModalOpen}
-        onModalClose={handleClickOpen}
-        modalRef={modalRef}
-        getAddress={getAddress}
-      />
-    </Wrap>
+    <Wrapper>
+      <Title>{newForm.title}</Title>
+      <Form>
+        {newForm.fields.map((form) => (
+          <InputList key={form.id}>
+            {form.id === "name" && (
+              <>
+                <InputBox
+                  label={form.label}
+                  nameMessage={nameMessage}
+                  id={form.id}
+                  type={form.type}
+                  required={form.required}
+                  placeholder={form.placeholder}
+                  value={user[form.id]}
+                  onChange={nameHandler}
+                />
+                {<AlertMessage>{nameMessage}</AlertMessage>}
+              </>
+            )}
+            {form.id === "phone" && (
+              <>
+                <InputBox
+                  label={form.label}
+                  nameMessage={nameMessage}
+                  id={form.id}
+                  type={form.type}
+                  required={form.required}
+                  value={user[form.id]}
+                  onChange={phoneHandler}
+                />
+                {<AlertMessage>{phoneMessage}</AlertMessage>}
+              </>
+            )}
+            {form.id === "address" && (
+              <AddressInput
+                label={form.label}
+                nameMessage={nameMessage}
+                id={form.id}
+                type={form.type}
+                required={form.required}
+                value={address}
+                setValue={setAddress}
+                onChange={nameHandler}
+              />
+            )}
+            {form.id === "input_0" && (
+              <SelectBox
+                label={form.label}
+                nameMessage={nameMessage}
+                id={form.id}
+                type={form.type}
+                required={form.required}
+                value={user[form.id]}
+                onChange={optionHandler}
+                options={form.options}
+              />
+            )}
+            {form.id === "input_1" && (
+              <PhotoInput
+                label={form.label}
+                id={form.id}
+                type={form.type}
+                required={form.required}
+                value={user[form.id]}
+              />
+            )}
+            {form.id === "agreement_0" && (
+              <AgreementBox
+                label={form.label}
+                id={form.id}
+                type={form.type}
+                required={form.required}
+                value={user[form.id]}
+                onClick={agreementHandler}
+                agreement={agreement}
+              />
+            )}
+          </InputList>
+        ))}
+        <SubmitButton
+          onClickSubmit={handleClickSubmit}
+          disabledSubmit={disabledSubmit}
+          isLoading={isLoading}
+          isSubmit={isSubmit}
+        />
+      </Form>
+    </Wrapper>
   );
-};
+}
 
 export default CreatedForm;
-
-const Wrap = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-`;
-
-const Fieldset = styled.fieldset``;
-
-const Label = styled.label`
-  font-weight: 600;
-  font-size: 0.75rem;
-`;
-
-const Input = styled.input`
-  width: 300px;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px 0;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-`;
