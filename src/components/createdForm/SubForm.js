@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FormList from "./FormList";
@@ -38,17 +39,13 @@ const AlertMessage = styled.span`
 `;
 
 function SubForm() {
-  //주소 변수 : sh
-  const [address, setAddress] = useState("");
-  // sh
-
   const [user, setUser] = useState({
     name: "",
     phone: "",
-    address: address,
-    select: "",
-    option: "",
-    file: "",
+    address: "",
+    input_0: "",
+    input_1: "",
+    agreement_0: false,
   });
 
   //오류메시지 상태저장
@@ -58,8 +55,7 @@ function SubForm() {
   // 유효성 검사
   const [isName, setIsName] = useState(false);
   const [isPhone, setIsPhone] = useState(false);
-  const [option, setOption] = useState(false);
-  const [agreement, setAgreement] = useState(false);
+  const [isOption, setIsOption] = useState(false);
 
   // phone 하이픈 자동 생성
   useEffect(() => {
@@ -79,6 +75,9 @@ function SubForm() {
     }
   }, [user.phone]);
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   // nameHandler
   const nameHandler = (e) => {
     const { value } = e.target;
@@ -93,6 +92,15 @@ function SubForm() {
       setIsName(true);
     }
   };
+
+  // submit 활성화
+  useEffect(() => {
+    if (isName || isPhone || isOption || user.agreement_0 || user.address) {
+      setDisabledSubmit(true);
+    } else {
+      setDisabledSubmit(false);
+    }
+  }, [isName, isPhone, isOption, user]);
 
   // phoneHandler
   const phoneHandler = (e) => {
@@ -115,22 +123,16 @@ function SubForm() {
 
   // option
   const optionHandler = (e) => {
-    setUser({ ...user, option: e.value });
-    setOption(true);
+    setUser({ ...user, input_0: e.value });
+    setIsOption(true);
   };
 
   // agreement
   const agreementHandler = () => {
-    setAgreement((prev) => !prev);
-  };
-
-  // formSubmit
-  const formSubmit = () => {
-    if (!isName || !isPhone || !option || !agreement) {
-      alert("필수항목을 입력하세요");
-    } else {
-      alert("성공");
-    }
+    setUser({
+      ...user,
+      agreement_0: user.agreement_0 ? false : true,
+    });
   };
 
   //제출하기 버튼 : sh
@@ -143,7 +145,7 @@ function SubForm() {
   };
 
   const handleClickSubmit = () => {
-    submitForm("김코딩", "010-4444-4444", "", "s", "", true, handleLoading)
+    submitForm(user, handleLoading)
       .then((result) => {
         console.log("제출 성공: ", result);
         setIsSubmit(true);
@@ -194,8 +196,10 @@ function SubForm() {
                 id={form.id}
                 type={form.type}
                 required={form.required}
-                value={address}
-                setValue={setAddress}
+                value={user[form.id]}
+                user={user}
+                setValue={setUser}
+                // setValue={setAddress}
                 onChange={nameHandler}
               />
             )}
@@ -218,6 +222,8 @@ function SubForm() {
                 type={form.type}
                 required={form.required}
                 value={user[form.id]}
+                user={user}
+                setUser={setUser}
               />
             )}
             {form.id === "agreement_0" && (
@@ -228,7 +234,7 @@ function SubForm() {
                 required={form.required}
                 value={user[form.id]}
                 onClick={agreementHandler}
-                agreement={agreement}
+                agreement={user.agreement_0}
               />
             )}
           </InputList>

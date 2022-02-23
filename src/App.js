@@ -11,20 +11,20 @@ import FormList from "./components/formList/FormList";
 
 function App() {
   return (
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<FormList />} />
-        <Route path="/dataList" element={<DataList />} />
-        {/*<SubForm />*/}
-        {/*<AddressInput />*/}
-        {/* <Route path="/form" element={<Form />}></Route>
+        <Routes>
+          {/* <Route path="/" element={<FormList />} /> */}
+          <Route path="/" element={<SubForm />} />
+          <Route path="/dataList" element={<DataList />} />
+          {/*<SubForm />*/}
+          {/*<AddressInput />*/}
+          {/* <Route path="/form" element={<Form />}></Route>
         {/* <Route path="/form/:id" element={<Form />}></Route>
         <Route path="/createdForm" element={<CreatedForm />}></Route> */}
-      </Routes>
-    </BrowserRouter>
-      </ThemeProvider>
-
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

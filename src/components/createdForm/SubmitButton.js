@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import Loading from "./Loading";
 import styled from "styled-components";
@@ -43,6 +44,7 @@ const Button = styled.button`
   border-radius: 10px;
   z-index: -1;
   cursor: pointer;
+  // @ts-ignore
   background-color: ${({ disabledSubmit }) =>
     disabledSubmit ? "lightGrey" : "#eb4d4b"};
 `;

@@ -47,7 +47,6 @@ export default function Field({ id, handleRemove, setFieldData }) {
   }, [id, desc, label, option, required, text, type]);
 
   useEffect(() => {
-    // @ts-ignore
     if (typeof data.id === "number") {
       setFieldData((prev) => [...prev.filter((item) => item.id !== id), data]);
     }

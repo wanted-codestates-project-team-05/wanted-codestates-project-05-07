@@ -94,9 +94,23 @@ const Progress = styled(ProgressBar)`
   ${(props) => props.progress && barSlide(props.progress)};
 `;
 
-export default function PhotoInput({ label, id, type, required, value }) {
+export default function PhotoInput({
+  label,
+  id,
+  type,
+  required,
+  value,
+  user,
+  setUser,
+}) {
   const [imageData, setImageData] = useState(null);
   const [size, setSize] = useState(0);
+
+  useEffect(() => {
+    if (imageData) {
+      setUser({ ...user, input_1: imageData });
+    }
+  }, [imageData]);
 
   useEffect(() => {
     if (size > 0) {
@@ -110,7 +124,6 @@ export default function PhotoInput({ label, id, type, required, value }) {
       reader.addEventListener("load", () => {
         setSize(e.target.files[0].size);
         setImageData(reader.result);
-        console.log(reader.result);
       });
       reader.readAsDataURL(e.target.files[0]);
     }
