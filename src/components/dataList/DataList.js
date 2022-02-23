@@ -107,7 +107,7 @@ const DataList = () =>  {
 
   return (
     <DataListContainer>
-      <DataNav num={dataLength} />
+      {/* <DataNav num={dataLength} /> */}
       <DataItemList>
         {fakeData && fakeData
         .filter((item, index) => index <= endPage && index >= startPage )

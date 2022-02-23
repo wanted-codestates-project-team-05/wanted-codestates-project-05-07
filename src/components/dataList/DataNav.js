@@ -2,10 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export function DataNav(dataLength) {
-  // function handlerClick() {
-  //   window.location.replace('/home');
-  // }
+export function DataNav({dataLength, moveDataListPage, moveFormListPage, show}) {
+
   const num = dataLength.num;
 
   return (
@@ -16,12 +14,10 @@ export function DataNav(dataLength) {
       </div>
 
       <ul>
-        <li className="li-first">
-          <Link to="/">
-            <p>formList</p>
-          </Link>
+        <li className={`li-first ${show ? '' : 'active'}`}  onClick={moveFormListPage}>
+          <p>formList</p>
         </li>
-        <li className="li-second">
+        <li className={`li-first ${show ? 'active' : ''}`} onClick={moveDataListPage}>
           <p>dataList</p>
         </li>
       </ul>
@@ -74,7 +70,7 @@ const DataHeader = styled.header`
     .li-first {
       margin-right: 30px;
     }
-    .li-second {
+    .active {
       padding-bottom: 5px;
       color: #ff4161;
       border-bottom: 3px solid #ff4161;
