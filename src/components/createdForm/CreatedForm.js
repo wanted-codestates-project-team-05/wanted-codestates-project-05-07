@@ -1,46 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FormList, newForm } from "./FormList";
+import { newForm } from "./FormData";
 import AddressInput from "./AddressInput";
 import SubmitButton from "./SubmitButton";
 import { submitForm } from "./submitForm";
 import { InputBox, SelectBox, AgreementBox } from "./formItems";
 import PhotoInput from "./PhotoInput";
 
-const Wrapper = styled.div`
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const Title = styled.h3`
-  margin-top: 20px;
-  font-size: 20px;
-`;
-
-const Form = styled.form`
-  width: 400px;
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 90%;
-  }
-`;
-
-const InputList = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const AlertMessage = styled.span`
-  font-size: 12px;
-  color: red;
-  margin-top: 5px;
-  padding-left: 10px;
-`;
-
-function CreatedForm() {
-  //주소 변수 : sh
+const CreatedForm = () => {
   const [address, setAddress] = useState("");
-  // sh
 
   const [user, setUser] = useState({
     name: "",
@@ -152,87 +120,91 @@ function CreatedForm() {
   };
   //sh 끝
 
+  const mappingInputList = (formList) => {
+    return formList.fields.map((form) => (
+      <InputList key={form.id}>
+        {form.id === "name" && (
+          <>
+            <InputBox
+              label={form.label}
+              nameMessage={nameMessage}
+              id={form.id}
+              type={form.type}
+              required={form.required}
+              placeholder={form.placeholder}
+              value={user[form.id]}
+              onChange={nameHandler}
+            />
+            {<AlertMessage>{nameMessage}</AlertMessage>}
+          </>
+        )}
+        {form.id === "phone" && (
+          <>
+            <InputBox
+              label={form.label}
+              nameMessage={nameMessage}
+              id={form.id}
+              type={form.type}
+              required={form.required}
+              value={user[form.id]}
+              onChange={phoneHandler}
+            />
+            {<AlertMessage>{phoneMessage}</AlertMessage>}
+          </>
+        )}
+        {form.id === "address" && (
+          <AddressInput
+            label={form.label}
+            nameMessage={nameMessage}
+            id={form.id}
+            type={form.type}
+            required={form.required}
+            value={address}
+            setValue={setAddress}
+            onChange={nameHandler}
+          />
+        )}
+        {form.id === "input_0" && (
+          <SelectBox
+            label={form.label}
+            nameMessage={nameMessage}
+            id={form.id}
+            type={form.type}
+            required={form.required}
+            value={user[form.id]}
+            onChange={optionHandler}
+            options={form.options}
+          />
+        )}
+        {form.id === "input_1" && (
+          <PhotoInput
+            label={form.label}
+            id={form.id}
+            type={form.type}
+            required={form.required}
+            value={user[form.id]}
+          />
+        )}
+        {form.id === "agreement_0" && (
+          <AgreementBox
+            label={form.label}
+            id={form.id}
+            type={form.type}
+            required={form.required}
+            value={user[form.id]}
+            onClick={agreementHandler}
+            agreement={agreement}
+          />
+        )}
+      </InputList>
+    ));
+  };
+
   return (
     <Wrapper>
       <Title>{newForm.title}</Title>
       <Form>
-        {newForm.fields.map((form) => (
-          <InputList key={form.id}>
-            {form.id === "name" && (
-              <>
-                <InputBox
-                  label={form.label}
-                  nameMessage={nameMessage}
-                  id={form.id}
-                  type={form.type}
-                  required={form.required}
-                  placeholder={form.placeholder}
-                  value={user[form.id]}
-                  onChange={nameHandler}
-                />
-                {<AlertMessage>{nameMessage}</AlertMessage>}
-              </>
-            )}
-            {form.id === "phone" && (
-              <>
-                <InputBox
-                  label={form.label}
-                  nameMessage={nameMessage}
-                  id={form.id}
-                  type={form.type}
-                  required={form.required}
-                  value={user[form.id]}
-                  onChange={phoneHandler}
-                />
-                {<AlertMessage>{phoneMessage}</AlertMessage>}
-              </>
-            )}
-            {form.id === "address" && (
-              <AddressInput
-                label={form.label}
-                nameMessage={nameMessage}
-                id={form.id}
-                type={form.type}
-                required={form.required}
-                value={address}
-                setValue={setAddress}
-                onChange={nameHandler}
-              />
-            )}
-            {form.id === "input_0" && (
-              <SelectBox
-                label={form.label}
-                nameMessage={nameMessage}
-                id={form.id}
-                type={form.type}
-                required={form.required}
-                value={user[form.id]}
-                onChange={optionHandler}
-                options={form.options}
-              />
-            )}
-            {form.id === "input_1" && (
-              <PhotoInput
-                label={form.label}
-                id={form.id}
-                type={form.type}
-                required={form.required}
-                value={user[form.id]}
-              />
-            )}
-            {form.id === "agreement_0" && (
-              <AgreementBox
-                label={form.label}
-                id={form.id}
-                type={form.type}
-                required={form.required}
-                value={user[form.id]}
-                onClick={agreementHandler}
-                agreement={agreement}
-              />
-            )}
-          </InputList>
-        ))}
+        {mappingInputList(newForm)}
         <SubmitButton
           onClickSubmit={handleClickSubmit}
           disabledSubmit={disabledSubmit}
@@ -242,6 +214,36 @@ function CreatedForm() {
       </Form>
     </Wrapper>
   );
-}
+};
 
 export default CreatedForm;
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Title = styled.h3`
+  margin-top: 20px;
+  font-size: 20px;
+`;
+
+const Form = styled.form`
+  width: 400px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 90%;
+  }
+`;
+
+const InputList = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const AlertMessage = styled.span`
+  font-size: 12px;
+  color: red;
+  margin-top: 5px;
+  padding-left: 10px;
+`;
