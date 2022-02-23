@@ -12,6 +12,7 @@ import AgreementForm from "./components/createdForm/AgreementForm";
 
 function App() {
   const [forms, setForms] = useState([]);
+  const [currentForm, setCurrentForm] = useState();
   const [dataList, setDataList] = useState(dummyResponse);
 
   useEffect(() => {
@@ -41,7 +42,7 @@ function App() {
           <Route
             path="/createdForm"
             element={
-              <CreatedForm newForm={newForm} setFormAnswer={setFormAnswer} />
+              <CreatedForm newForm={newForm} currentDataList={dataList} setFormAnswer={setDataList} />
             }
           />
           <Route
