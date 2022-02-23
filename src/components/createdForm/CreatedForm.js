@@ -13,7 +13,7 @@ const CreatedForm = ({ newForm }) => {
   const [user, setUser] = useState({
     name: "",
     phone: "",
-    address: address,
+    address: "",
     select: "",
     option: "",
     file: "",
@@ -26,8 +26,7 @@ const CreatedForm = ({ newForm }) => {
   // 유효성 검사
   const [isName, setIsName] = useState(false);
   const [isPhone, setIsPhone] = useState(false);
-  const [option, setOption] = useState(false);
-  const [agreement, setAgreement] = useState(false);
+  const [isOption, setIsOption] = useState(false);
 
   // phone 하이픈 자동 생성
   useEffect(() => {
@@ -47,6 +46,9 @@ const CreatedForm = ({ newForm }) => {
     }
   }, [user.phone]);
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   // nameHandler
   const nameHandler = (e) => {
     const { value } = e.target;
@@ -61,6 +63,14 @@ const CreatedForm = ({ newForm }) => {
       setIsName(true);
     }
   };
+  // submit 활성화
+  useEffect(() => {
+    if (isName || isPhone || isOption || user.agreement_0 || user.address) {
+      setDisabledSubmit(true);
+    } else {
+      setDisabledSubmit(false);
+    }
+  }, [isName, isPhone, isOption, user]);
 
   // phoneHandler
   const phoneHandler = (e) => {
@@ -83,22 +93,16 @@ const CreatedForm = ({ newForm }) => {
 
   // option
   const optionHandler = (e) => {
-    setUser({ ...user, option: e.value });
-    setOption(true);
+    setUser({ ...user, input_0: e.value });
+    setIsOption(true);
   };
 
   // agreement
   const agreementHandler = () => {
-    setAgreement((prev) => !prev);
-  };
-
-  // formSubmit
-  const formSubmit = () => {
-    if (!isName || !isPhone || !option || !agreement) {
-      alert("필수항목을 입력하세요");
-    } else {
-      alert("성공");
-    }
+    setUser({
+      ...user,
+      agreement_0: user.agreement_0 ? false : true,
+    });
   };
 
   //제출하기 버튼 : sh
@@ -111,7 +115,7 @@ const CreatedForm = ({ newForm }) => {
   };
 
   const handleClickSubmit = () => {
-    submitForm("김코딩", "010-4444-4444", "", "s", "", true, handleLoading)
+    submitForm(user, handleLoading)
       .then((result) => {
         console.log("제출 성공: ", result);
         setIsSubmit(true);
@@ -159,8 +163,9 @@ const CreatedForm = ({ newForm }) => {
             id={form.id}
             type={form.type}
             required={form.required}
-            value={address}
-            setValue={setAddress}
+            value={user[form.id]}
+            user={user}
+            setValue={setUser}
             onChange={nameHandler}
           />
         )}
@@ -182,7 +187,8 @@ const CreatedForm = ({ newForm }) => {
             id={form.id}
             type={form.type}
             required={form.required}
-            value={user[form.id]}
+            user={user}
+            setUser={setUser}
           />
         )}
         {form.id === "agreement_0" && (
@@ -193,7 +199,7 @@ const CreatedForm = ({ newForm }) => {
             required={form.required}
             value={user[form.id]}
             onClick={agreementHandler}
-            agreement={agreement}
+            agreement={user.agreement_0}
           />
         )}
       </InputList>
