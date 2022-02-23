@@ -1,28 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-export function DataNav(dataLength) {
-  // function handlerClick() {
-  //   window.location.replace('/home');
-  // }
-  const num = dataLength.num;
+export function DataNav({moveDataListPage, moveFormListPage, show}) {
 
   return (
     <DataHeader>
-      <div className="data-tit">
-        <img src="/icon.png" alt="" className="icon-img" />
-        <h1>dataList {num}개</h1>
-      </div>
-
       <ul>
-        <li className="li-first">
-          <Link to="/">
-            <p>formList</p>
-          </Link>
+        <li className={`li-first ${show ? '' : 'active'}`}  onClick={moveFormListPage}>
+          <p>폼 생성 목록</p>
         </li>
-        <li className="li-second">
-          <p>dataList</p>
+        <li className={`li-first ${show ? 'active' : ''}`} onClick={moveDataListPage}>
+          <p>데이터 목록</p>
         </li>
       </ul>
     </DataHeader>
@@ -52,7 +40,7 @@ const DataHeader = styled.header`
   }
   ul {
     position: absolute;
-    bottom: -16px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     li {
@@ -62,11 +50,6 @@ const DataHeader = styled.header`
       font-size: 1.4em;
       background-color: inherit;
       border: none;
-      a {
-        text-decoration: none;
-        color: #000000;
-        cursor: pointer;
-      }
       p {
         margin: 0;
       }
@@ -74,10 +57,11 @@ const DataHeader = styled.header`
     .li-first {
       margin-right: 30px;
     }
-    .li-second {
+    .active {
       padding-bottom: 5px;
       color: #ff4161;
       border-bottom: 3px solid #ff4161;
+      box-sizing: border-box;
     }
   }
 `;

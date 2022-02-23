@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { dummyForms } from "../../data/dummies";
-import Pagination from "../CommonComponents/Pagination";
+import Pagination from "../commonComponents/Pagination";
 
 const Background = styled.div`
   width: 100vw;
-  height: 100vh;
   display: flex;
+  padding-top: 3em;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -38,9 +37,9 @@ const ListTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   font-weight: 500;
   font-size: 18px;
+  text-align: center;
 `;
 
 const Button = styled.button`
@@ -63,8 +62,9 @@ const Icon = styled.div`
   justify-content: center;
 `;
 
-export default function FormList() {
-  const [forms, setForms] = useState([]);
+export default function FormList({forms, setForms}) {
+
+  // const [forms, setForms] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [formsPerPage] = useState(5);
 
@@ -75,12 +75,12 @@ export default function FormList() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    setForms(dummyForms);
-  }, []);
+    setForms(forms)
+  },[forms, setForms])
 
   return (
     <Background>
-      <Title>폼 생성 목록</Title>
+      {/* <Title>폼 생성 목록</Title> */}
       <Container>
         {currentForms.map((each) => (
           <ListItem key={each.id}>
