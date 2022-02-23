@@ -77,7 +77,6 @@ export default function FormList({ forms, setForms, setClickId }) {
 
   const handleClick = (id) => {
     setClickId(id);
-    console.log(id);
     navigate(`/createdForm`);
   };
 
