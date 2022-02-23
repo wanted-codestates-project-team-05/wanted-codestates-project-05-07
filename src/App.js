@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./App.css";
 import "./reset.css";
-import AddressInput from "./components/createdForm/AddressInput";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme";
 // import SubForm from "./components/createdForm/SubForm";
@@ -13,6 +12,8 @@ import DataList from "./components/dataList/DataList";
 import FormList from "./components/formList/FormList";
 import Form from "./components/Form";
 import CreatedForm from "./components/createdForm/CreatedForm";
+import { newForm } from "./components/createdForm/FormData";
+import AgreementForm from "./components/createdForm/AgreementForm";
 
 function App() {
 
@@ -28,10 +29,11 @@ function App() {
   }, []);
 
 
+  const [formAnswer, setFormAnswer] = useState();
   return (
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <BrowserRouter>
-      <Routes>
+        <Routes>
         <Route path="/" element={<Home dataList={dataList} setDataList={setDataList} forms={forms} setForms={setForms}/>} />
         {/* <Route path="/dataList" element={<DataList />} /> */}
         {/*<SubForm />*/}
@@ -40,9 +42,21 @@ function App() {
         {/* <Route path="/form/:id" element={<Form />}></Route>
         <Route path="/createdForm" element={<CreatedForm />}></Route> */}
         <Route path="/createdForm" element={<CreatedForm />}></Route>
-      </Routes>
-    </BrowserRouter>
-      </ThemeProvider>
+          <Route
+            path="/createdForm"
+            element={
+              <CreatedForm newForm={newForm} setFormAnswer={setFormAnswer} />
+            }
+          />
+          <Route
+            path="/createdForm/openAgreement"
+            element={<AgreementForm />}
+          />
+          <Route path="/dataList" element={<DataList />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+
   );
 }
 

@@ -1,9 +1,11 @@
+// @ts-nocheck
 import React from "react";
 import styled from "styled-components";
 import Select from "react-select";
 import { VscChevronRight } from "react-icons/vsc";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { GiCircle } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
 const Label = styled.label`
   font-weight: 600;
@@ -12,6 +14,20 @@ const Label = styled.label`
   flex-direction: column;
   margin-top: 20px;
 `;
+
+const AgreementLabel = styled(Label)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 5px;
+`;
+
+const Wrapper = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+`;
+
 const Input = styled.input`
   width: 100%;
   height: 50px;
@@ -25,6 +41,31 @@ const Input = styled.input`
     font-size: 16px;
   }
 `;
+
+// Option custom
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    color: state.data.color,
+    opacity: 0.8,
+    padding: 20,
+  }),
+  control: (provided) => ({
+    ...provided,
+    width: "100%",
+    height: "50px",
+    border: "none",
+    borderRadius: 12,
+    paddingLeft: 5,
+    background: "#f7fafb",
+    fontSize: 23,
+    marginTop: 10,
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    color: state.data.color,
+  }),
+};
 
 export const InputBox = ({
   label,
@@ -82,40 +123,48 @@ export const SelectBox = ({
         options={obj}
         onChange={onChange}
         placeholder=""
+        styles={customStyles}
+        components={{
+          IndicatorSeparator: () => null,
+        }}
       />
     </Label>
   );
 };
 
 export const AgreementBox = ({ label, onClick, agreement }) => {
+  const navigate = useNavigate();
   return (
-    <Label style={{ flexDirection: "row", alignItems: "center" }}>
-      {agreement ? (
-        <AiFillCheckCircle
-          onClick={onClick}
-          size="24"
-          style={{
-            marginRight: 10,
-            color: "#eb4d4b",
-          }}
-        />
-      ) : (
-        <GiCircle
-          onClick={onClick}
-          size="24"
-          style={{
-            marginRight: 10,
-          }}
-        />
-      )}
-
-      {`${label} (필수)`}
+    <AgreementLabel>
+      <Wrapper>
+        {agreement ? (
+          <AiFillCheckCircle
+            onClick={onClick}
+            size="24"
+            style={{
+              marginRight: 10,
+              color: "#eb4d4b",
+            }}
+          />
+        ) : (
+          <GiCircle
+            onClick={onClick}
+            size="24"
+            style={{
+              marginRight: 10,
+            }}
+          />
+        )}
+        {`${label} (필수)`}
+      </Wrapper>
       <VscChevronRight
         style={{
-          marginLeft: 130,
           cursor: "pointer",
         }}
+        onClick={() =>
+          navigate("/createdForm/openAgreement", { state: { agreement } })
+        }
       />
-    </Label>
+    </AgreementLabel>
   );
 };

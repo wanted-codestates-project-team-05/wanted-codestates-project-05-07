@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import AddressModal from "./AddressModal";
@@ -7,13 +8,14 @@ const AddressInput = ({
   id,
   type,
   required,
+  user,
   value,
   setValue,
   onChange,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const getAddress = (address) => {
-    setValue(address);
+    setValue({ ...user, address: address });
   };
 
   const modalRef = useRef(null);
