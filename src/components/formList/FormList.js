@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Pagination from "../commonComponents/Pagination";
 import { useNavigate } from "react-router";
@@ -90,7 +91,7 @@ export default function FormList({ forms, setForms, setClickId }) {
       <Container>
         {currentForms.map((each) => (
           <ListItem key={each.id} onClick={() => handleClick(each.id - 1)}>
-            <Icon>{/* <ion-icon name="document-text" /> */}</Icon>
+            <Icon><ion-icon name="document-text" /></Icon>
             <ListTitle>{each.title}</ListTitle>
           </ListItem>
         ))}
@@ -101,7 +102,9 @@ export default function FormList({ forms, setForms, setClickId }) {
         totalForms={forms.length}
         paginate={paginate}
       />
-      <Button>폼 생성</Button>
+      <Link to="/form">
+        <Button>폼 생성</Button>
+      </Link>
     </Background>
   );
 }

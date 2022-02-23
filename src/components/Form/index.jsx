@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Field from "./Field";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { arrayMoveImmutable } from "array-move";
+import { useNavigate } from "react-router-dom";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -66,8 +67,9 @@ const SortableList = SortableContainer(({ children }) => {
 });
 
 const SortableItem = SortableElement(({ children }) => <>{children}</>);
-export default function Form() {
-  // const navigate = useNavigate();
+
+export default function Form({ forms, setForms }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ title: "", fieldData: [] });
   const [fieldData, setFieldData] = useState([]);
   const [title, setTitle] = useState("");
@@ -100,6 +102,7 @@ export default function Form() {
     setFormData({
       title,
       fieldData,
+      id: forms[forms.length - 1].id + 1,
     });
   };
 
@@ -108,18 +111,17 @@ export default function Form() {
     if (fieldData.filter((item) => item.label === "").length !== 0) return;
     if (fieldData.filter((item) => item.type === "").length !== 0) return;
     saveData();
-    // setTimeout(() => {
-    //   navigate('/')
-    // }, 1000)
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
 
   useEffect(() => {
-    console.log(fieldData);
-  }, [fieldData]);
-
-  useEffect(() => {
     console.log(formData);
-  }, [formData]);
+    if (formData.title !== "") {
+      setForms((prev) => [...prev, formData]);
+    }
+  }, [formData, setForms]);
 
   const handleSortEnd = ({ oldIndex, newIndex }) => {
     const newField = [...field];

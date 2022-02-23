@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./Home";
 import { dummyResponse, dummyForms } from "./data/dummies";
 import AgreementForm from "./components/createdForm/AgreementForm";
+import Form from "./components/Form";
 
 function App() {
   const [forms, setForms] = useState([]);
@@ -51,6 +52,10 @@ function App() {
           <Route
             path="/createdForm/openAgreement"
             element={<AgreementForm />}
+          />
+          <Route
+            path="/form"
+            element={<Form forms={forms} setForms={setForms} />}
           />
         </Routes>
       </BrowserRouter>

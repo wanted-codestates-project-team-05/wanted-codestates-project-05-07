@@ -13,11 +13,13 @@ import {
   Middle,
   SelectBox,
 } from "./styles";
+
 const DragHandler = SortableHandle(() => (
   <DragBox>
     <span>↕</span>
   </DragBox>
 ));
+
 export default function Field({ id, handleRemove, setFieldData }) {
   const [data, setData] = useState({});
   const [type, setType] = useState("");
