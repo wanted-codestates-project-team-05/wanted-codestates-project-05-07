@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Field from "./Field";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import arrayMove from "array-move";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 600px;
 `;
 
-const FeildWrapper = styled.div`
+const FieldWrapper = styled.div`
   margin-bottom: 5px;
 `;
 
@@ -59,22 +61,22 @@ const BtnWrapper = styled.div`
   gap: 10px;
 `;
 
+const SortableList = SortableContainer(({ children }) => {
+  return <FieldWrapper>{children}</FieldWrapper>;
+});
+
+const SortableItem = SortableElement(({ children }) => <>{children}</>);
+
 export default function Form() {
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState({ title: "", fieldData: [] });
   const [fieldData, setFieldData] = useState([]);
   const [title, setTitle] = useState("");
   const [count, setCount] = useState(0);
   const [field, setField] = useState([]);
 
-  const saveData = () => {
-    setFormData({
-      title,
-      fieldData,
-    });
-  };
-
   const handleRemove = (id) => {
-    setField((prev) => prev.filter((item) => item.index !== id));
+    setField((prev) => prev.filter((item) => item.id !== id));
   };
 
   const handleAdd = () => {
@@ -89,10 +91,26 @@ export default function Form() {
             setFieldData={setFieldData}
           />
         ),
-        index: count,
+        id: count,
       },
     ]);
     setCount((prev) => prev + 1);
+  };
+
+  const saveData = () => {
+    setFormData({
+      title,
+      fieldData,
+    });
+  };
+
+  const handleSave = () => {
+    console.log("first");
+    if (fieldData.filter((item) => item.label === "" || item.type === ""))
+      return;
+    console.log("s");
+    saveData();
+    // navigate("/");
   };
 
   useEffect(() => {
@@ -104,11 +122,19 @@ export default function Form() {
       <P>제목 *</P>
       <InputTitle value={title} onChange={(e) => setTitle(e.target.value)} />
       <P>필드목록 *</P>
-      <FeildWrapper>{field.map((comp) => comp.content)}</FeildWrapper>
+      <FieldWrapper>
+        <SortableList useDragHandle>
+          {field.map((comp, index) => (
+            <SortableItem key={index} index={index}>
+              {comp.content}
+            </SortableItem>
+          ))}
+        </SortableList>
+      </FieldWrapper>
       <AddBtn onClick={handleAdd}>필드 추가하기</AddBtn>
       <BtnWrapper>
         <Button>폼열기</Button>
-        <SaveBtn>저장하기</SaveBtn>
+        <SaveBtn onClick={handleSave}>저장하기</SaveBtn>
       </BtnWrapper>
     </Container>
   );

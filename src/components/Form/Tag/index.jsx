@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 100%;
   padding: 3px 8px;
   gap: 5px;
   min-height: 30px;

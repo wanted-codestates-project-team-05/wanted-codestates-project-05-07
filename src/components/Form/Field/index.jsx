@@ -12,6 +12,13 @@ import {
   Middle,
   SelectBox,
 } from "./styles";
+import { SortableHandle } from "react-sortable-hoc";
+
+const DragHandler = SortableHandle(() => (
+  <DragBox>
+    <span>↕</span>
+  </DragBox>
+));
 
 export default function Field({ id, handleRemove, setFieldData }) {
   const [data, setData] = useState({});
@@ -44,7 +51,7 @@ export default function Field({ id, handleRemove, setFieldData }) {
     if (typeof data.id === "number") {
       setFieldData((prev) => [...prev.filter((item) => item.id !== id), data]);
     }
-  });
+  }, [data, id, setFieldData]);
 
   return (
     <Container>
@@ -78,9 +85,7 @@ export default function Field({ id, handleRemove, setFieldData }) {
             필수
           </label>
         </Check>
-        <DragBox>
-          <span>↕</span>
-        </DragBox>
+        <DragHandler />
         <CloseBtn onClick={handleClick}>x</CloseBtn>
       </FirstBox>
       {type === "text" || type === "phone" || type === "select" ? (
