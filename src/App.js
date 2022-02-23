@@ -9,6 +9,10 @@ import CreatedForm from './components/createdForm/CreatedForm';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from './Home';
 import { dummyResponse, dummyForms } from './data/dummies';
+import DataList from "./components/dataList/DataList";
+import FormList from "./components/formList/FormList";
+import Form from "./components/Form";
+import CreatedForm from "./components/createdForm/CreatedForm";
 
 function App() {
 
@@ -39,7 +43,6 @@ function App() {
       </Routes>
     </BrowserRouter>
       </ThemeProvider>
-
   );
 }
 

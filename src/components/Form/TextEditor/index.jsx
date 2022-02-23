@@ -7,6 +7,7 @@ const Container = styled.div`
   .ql-container {
     border: none;
     min-height: 50px;
+    border-radius: 0 0 7px 7px;
   }
   .ql-toolbar {
     border: none;

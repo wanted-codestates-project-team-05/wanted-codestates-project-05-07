@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const FieldContainer = styled.li`
   display: flex;
   flex-direction: column;
   width: 500px;
@@ -69,6 +69,7 @@ export const DragBox = styled.div`
 `;
 
 export const Check = styled.div`
+  -webkit-appearance: checkbox;
   border-right: 1px solid lightgray;
   background-color: lightgray;
   display: flex;

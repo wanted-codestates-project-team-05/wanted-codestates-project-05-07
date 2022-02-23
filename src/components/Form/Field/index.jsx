@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { SortableHandle } from "react-sortable-hoc";
 import Tag from "../Tag";
 import TextEditor from "../TextEditor";
 import {
   Check,
   CloseBtn,
-  Container,
+  FieldContainer,
   DragBox,
   FirstBox,
   Input,
@@ -12,21 +13,18 @@ import {
   Middle,
   SelectBox,
 } from "./styles";
-import { SortableHandle } from "react-sortable-hoc";
-
 const DragHandler = SortableHandle(() => (
   <DragBox>
     <span>↕</span>
   </DragBox>
 ));
-
 export default function Field({ id, handleRemove, setFieldData }) {
   const [data, setData] = useState({});
   const [type, setType] = useState("");
   const [label, setLabel] = useState("");
-  const [option, setOption] = useState([]);
-  const [desc, setDesc] = useState("");
   const [text, setText] = useState("");
+  const [desc, setDesc] = useState("");
+  const [option, setOption] = useState([]);
   const [required, setRequired] = useState(false);
 
   const handleClick = () => {
@@ -54,7 +52,7 @@ export default function Field({ id, handleRemove, setFieldData }) {
   }, [data, id, setFieldData]);
 
   return (
-    <Container>
+    <FieldContainer>
       <FirstBox>
         <SelectBox>
           <select onChange={(e) => setType(e.target.value)}>
@@ -85,7 +83,10 @@ export default function Field({ id, handleRemove, setFieldData }) {
             필수
           </label>
         </Check>
-        <DragHandler />
+        <DragBox>
+          <span>↕</span>
+        </DragBox>
+        {/* <DragHandler /> */}
         <CloseBtn onClick={handleClick}>x</CloseBtn>
       </FirstBox>
       {type === "text" || type === "phone" || type === "select" ? (
@@ -104,6 +105,6 @@ export default function Field({ id, handleRemove, setFieldData }) {
         ""
       )}
       <TextEditor setDesc={setDesc} />
-    </Container>
+    </FieldContainer>
   );
 }

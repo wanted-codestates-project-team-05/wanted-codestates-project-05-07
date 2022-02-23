@@ -84,9 +84,7 @@ export default function FormList({forms, setForms}) {
       <Container>
         {currentForms.map((each) => (
           <ListItem key={each.id}>
-            <Icon>
-              <ion-icon name="document-text" />
-            </Icon>
+            <Icon>{/* <ion-icon name="document-text" /> */}</Icon>
             <ListTitle>{each.title}</ListTitle>
           </ListItem>
         ))}
