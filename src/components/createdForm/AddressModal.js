@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import * as PropTypes from "prop-types";
 import DaumPostcode from "react-daum-postcode";
@@ -23,7 +23,13 @@ const AddressModal = ({ isModalOpen, onModalClose, modalRef, getAddress }) => {
           <CloseModalBtn onClick={onModalClose}>X</CloseModalBtn>
           <Text id="modal-jtw">배송 주소</Text>
         </ModalHeader>
-        <DaumPostcode style={postCodeStyle} onComplete={handleComplete} />
+        {isModalOpen ? (
+          <DaumPostcode
+            style={postCodeStyle}
+            onComplete={handleComplete}
+            isDaumPost={isModalOpen}
+          />
+        ) : null}
       </Modal>
     </div>
   );
